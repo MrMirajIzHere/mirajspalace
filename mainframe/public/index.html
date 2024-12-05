@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Clear-Site-Data" content="cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <title>Mainframe</title>
+	<link href="favicon.png" rel="icon" type="image/png" />
+	
+	<style>
+	@font-face {
+	font-family: IBM;
+	src: url('IBM_EGA.woff'); 
+	font-smooth: never;
+} 
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body><!-- Logo and instructions on how to use the website -->
+<div class="art" style="font-size: 28px; font-family: IBM"><span style="color: #00FF00; background: #000000;">
+___  ____           _ _     
+&#124;  &#92;&#47;  (_)         (_&#124; )    
+&#124; .  . &#124;_ _ __ __ _ _&#124;&#47; ___ 
+&#124; &#124;&#92;&#47;&#124; &#124; &#124; '__&#47; _&#96; &#124; &#124; &#47; __&#124;
+&#124; &#124;  &#124; &#124; &#124; &#124; &#124; (_&#124; &#124; &#124; &#92;__ &#92;
+&#92;_&#124;__&#124;_&#47;_&#124;_&#124;  &#92;__,_&#124; &#124; &#124;___&#47;
+&#124; ___ &#92;   &#124; &#124;     _&#47; &#124;      
+&#124; &#124;_&#47; &#47;_ _&#124; &#124; __ &#124;__&#47;__ ___ 
+&#124;  __&#47; _&#96; &#124; &#124;&#47; _&#96; &#124;&#47; __&#47; _ &#92;
+&#124; &#124; &#124; (_&#124; &#124; &#124; (_&#124; &#124; (_&#124;  __&#47;
+&#92;_&#124;  &#92;__,_&#124;_&#124;&#92;__,_&#124;&#92;___&#92;___&#124;
+Mainframe interface //
+                                            </span></div>
+<!-- Where the content will be displayed -->
+
+<div class="content" style="font-size: 28px; font-family: IBM">&nbsp;</div>
+<!-- The input -->
+
+<div id="txt">
+<p class="path" style="font-size: 28px; font-family: IBM">@&gt;</p>
+<input autofocus="" class="txt-input" onfocus="this.select()" style="font-size: 28px; font-family: IBM" type="text" /></div>
+
+<div>&nbsp;</div>
+<script src="main.js"></script><script>
+	var date = new Date();
+	var current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+	var date_time = current_date+" "+current_time;	
+	document.getElementById("currentDateTime").innerHTML = date_time;
+</script><script>
+function playSound(url) {
+  const audio = new Audio(url);
+  audio.play();
+}
+</script></body>
+</html>
