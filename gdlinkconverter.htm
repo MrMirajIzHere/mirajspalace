@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+	<title>Link converter</title>
+	<link href="images/faviconCon.png" rel="icon" type="image/png" />
+	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+	<meta content="Miraj's Palace" property="og:title" />
+	<meta content="I do STufF HERe!!1!" property="og:description" />
+	<meta content="http://mirajspalace.space:25566/" property="og:url" />
+	<meta content="http://mirajspalace.space:25566/images/mirajspalaceEMBED.png" property="og:image" />
+	<meta content="#462b52" data-react-helmet="true" name="theme-color" />
+	<style>
+	@font-face {
+	font-family: Sharp;
+	src: url('Px437_Sharp_PC3K.ttf'); 
+	font-smooth: never;
+} 
+</style>
+</head>
+
+<body background="images/animspace.gif" link="#FF0000" vlink="#7F7F7F">
+	<hr style="color:ffffff"/>
+	<span style="text-align: center; line-height:2; display: block; margin: auto; font-family: Sharp; image-rendering: pixelated; color: #ffffff; ">
+
+    <label for="input">LINK TO GOOGLE DRIVE IMAGE:</label><br>
+    <input type="text" id="link" size="63" placeholder="https://drive.google.com/file/d/11tsEHD_4OdDei0YFgZUmeansZFPmT58X/view"><br><br>
+	<label for="input">HORIZONTAL(pixels):</label><br>
+	<input type="text" id="horizontal" placeholder="1000"><br><br>
+    <input type="submit" value="submit" onclick="submit()">
+
+	<br>
+	<hr style="color:ffffff"/>
+	OUTPUT:
+	<div id="output"></div>
+	<br>
+	<hr style="color:ffffff"/>
+	
+	</span>
+<script>
+function submit() {
+let glink = document.getElementById('link').value;
+let horiz = document.getElementById('horizontal').value;
+console.log(glink);
+console.log(horiz);
+
+if ((glink = "<empty string>")||(horiz = "<empty string>")) {
+document.getElementById('output').innerHTML = "not all fields filled out"
+} else {
+let preout = glink.substr(32,33);
+console.log(preout);
+
+document.getElementById('output').innerHTML = "https://drive.google.com/thumbnail?id=" + preout + "&sz=w" + horiz;
+}
+}
+</script>
+
+</body>
+</html>
