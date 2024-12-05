@@ -1,0 +1,96 @@
+	@font-face {
+	font-family: Sharp;
+	src: url('Px437_Sharp_PC3K.ttf'); 
+	font-smooth: never;
+}
+	@font-face {
+	font-family: IBM;
+	src: url('IBM_EGA.TTF'); 
+	font-smooth: never;
+}
+
+/*reusables*/
+.maindiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #C0C0C0;
+  border-style: outset;
+  border-width: 2px;
+  text-align: left;
+  font-family: Sharp;
+  font-size: 8;
+}
+.console {
+  position: absolute;
+  z-index: 9;
+  background-color: #130019;
+  border-style: outset;
+  border-width: 2px;
+  border-color: #827287;
+  text-align: left;
+  font-family: IBM;
+  color: #C2BBCE;
+} 
+.headerdiv {
+  cursor: move;
+  z-index: 10;
+  background-color: #00007F;
+  color: #fff;
+  font-family: Sharp;
+  font-size: 8;
+  padding:5px;
+}
+
+/*windows*/
+#title {
+   top: round(nearest, calc(60vh - 486px), 1px); 
+  left: round(nearest, calc(50vw - 351px), 1px);
+}
+#aboutme {
+   top: round(nearest, calc(43vh - 234px), 1px);
+  left: round(nearest, calc(34vw - 332px), 1px);
+}
+#stuff {
+   top: round(nearest, calc(138vh - 725px), 1px);
+  left: round(nearest, calc(51vw - 445px), 1px);
+}
+#music {
+   top: round(nearest, calc(86vh - 406px), 1px);
+  left: round(nearest, calc(57vw - 473px), 1px);
+}
+#funstuff {
+   top: round(nearest, calc(153vh - 878px), 1px);
+  left: round(nearest, calc(62vw - 231px), 1px);
+}
+#forum {
+   top: round(nearest, calc(115vh - 446px), 1px);
+  left: round(nearest, calc(50vw - 181px), 1px);
+}
+#blog {
+   top: round(nearest, calc(55vh - 298px), 1px);
+  left: round(nearest, calc(60vw - 31px), 1px);
+}
+#info {
+   top: round(nearest, calc(136vh - 783px), 1px);
+  left: round(nearest, calc(70vw - 31px), 1px);
+}
+#links {
+   top: round(nearest, calc(58vh - 316px), 1px);
+  left: round(nearest, calc(46vw - 321px), 1px);
+}
+#embed {
+   top: round(nearest, calc(121vh - 473px), 1px);
+  left: round(nearest, calc(94vw - 584px), 1px);
+}
+#noai {
+   top: round(nearest, calc(93vh - 78px), 1px);
+  left: round(nearest, calc(54vw - 151px), 1px);
+}
+#reswarn {
+   top: round(nearest, calc(17vh - 112px), 1px);
+  left: round(nearest, calc(64vw - 401px), 1px);
+}
+#plant {
+   top: round(nearest, calc(21vh - 42px), 1px);
+  left: round(nearest, calc(71vw - 10px), 1px);
+}
