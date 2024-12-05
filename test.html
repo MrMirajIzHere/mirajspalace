@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Пример перетаскивания</title>
+    <style>
+        #waterCan {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+
+        #blog {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+and what do you think you are doing here<br>
+go <a href="index.html">back</a><br><br>
+    <div id="waterCan" draggable="true" ondragstart="dragStart(event)" ondragend="endDrag(event)">Перетаскиваемый элемент<br>
+        <img id="waterCanPNG" src="images/wateringCanSMALL.png">
+    </div>
+    <br>
+    <div id="blog" ondrop="drop(event)" ondragover="allowDrop(event)">Блог</div>
+
+<script>
+function dragStart(e) {
+    console.log("drag start");
+    e.dataTransfer.setData("text", e.target.id);
+    document.getElementById('waterCanPNG').src = 'images/wateringCanSMALLdragged.png';
+}
+
+function drop(e) {
+    if (e.preventDefault) {
+        e.preventDefault();
+    }
+
+    var waterCanD = e.dataTransfer.getData("text");
+    console.log(waterCanD + " dropped on " + e.target.id);
+}
+
+function allowDrop(e) {
+     e.preventDefault();
+}
+
+function endDrag(e){
+    document.getElementById('waterCanPNG').src = 'images/wateringCanSMALL.png';
+	console.log("drag stopped");
+}
+</script>
+</body>
+</html>
