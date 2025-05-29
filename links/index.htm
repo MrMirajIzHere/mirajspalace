@@ -20,9 +20,17 @@
   top: 2px;
   left: 2px;
 }
+#explode {
+  position: absolute;
+  display: none;
+}
 </style>
 </head>
 <body background="../images/animspace.gif" style="background-color: 000000; image-rendering: pixelated;">
+
+<div id="explode">
+<img src="../images/explode.gif">
+</div>
 
 <!--links-->
 <div id="linksL" class="console">
@@ -53,6 +61,9 @@ function funny(){
 let x = event.clientX;
 let y = event.clientY;
 console.log(x, y)
+document.getElementById("explode").style.display = "block";
+document.getElementById("explode").style.left = x;
+document.getElementById("explode").style.right = y;
 }
 </script>
 
