@@ -12,6 +12,7 @@ dragElement(document.getElementById("embed"));
 dragElement(document.getElementById("noai"));
 dragElement(document.getElementById("reswarn"));
 dragElement(document.getElementById("plant"));
+dragElement(document.getElementById("linksL"));
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
