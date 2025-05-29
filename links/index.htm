@@ -68,6 +68,11 @@ document.getElementById("explode").style.display = "block";
 document.getElementById("explode").style.left = x - 34;
 document.getElementById("explode").style.top = y - 48;
 document.getElementById("explodeimg").src = gif;
+
+let delayInMilliseconds =3000
+setTimeout(function() {
+	location.reload()
+}, delayInMilliseconds);
 }
 </script>
 
