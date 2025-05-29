@@ -61,11 +61,12 @@
 function funny(){
 let x = event.clientX;
 let y = event.clientY;
+let gif = ../images/explode.gif?=Math.random()
 console.log(x, y)
 document.getElementById("explode").style.display = "block";
 document.getElementById("explode").style.left = x - 34;
 document.getElementById("explode").style.top = y - 48;
-document.getElementById("explodeimg").src = "../images/explode.gif";
+document.getElementById("explodeimg").src = '"' + gif + '"';
 }
 </script>
 
