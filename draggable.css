@@ -94,3 +94,7 @@
    top: round(nearest, calc(21vh - 42px), 1px);
   left: round(nearest, calc(71vw - 10px), 1px);
 }
+#linksL {
+   top: round(nearest, calc(58vh - 316px), 1px);
+  left: round(nearest, calc(46vw - 321px), 1px);
+}
