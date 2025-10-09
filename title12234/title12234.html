@@ -19,6 +19,15 @@
 	}
 	}
 	
+	@keyframes transitionSide {
+	from {
+	clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+	}
+	to {
+    clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
+	}
+	}
+	
 	.revealAnim {
 	animation: play 6s steps(30, end);
 	animation-name: transitionIn;
@@ -26,14 +35,14 @@
 	}
 	
 	.revealAnim1 {
-	animation: play 0.5s steps(6, end);
+	animation: play 8s steps(50, end);
 	animation-name: transitionIn;
 	animation-fill-mode: forwards none;
 	}
 	
 	.revealAnim2 {
-	animation: play 8s steps(50, end);
-	animation-name: transitionIn;
+	animation: play 628s;
+	animation-name: transitionSide;
 	animation-fill-mode: forwards none;
 	}
 	
@@ -53,14 +62,6 @@
 	td {
 	border:1px solid gray;
 	padding:10px;
-	}
-	
-	.time {
-	color: gray;
-	}
-	
-	.number {
-	text-align: right;
 	}
 	
 	.image {
@@ -115,19 +116,31 @@
   
   <tr style="text-align: center; line-height: 265%;" class="stroke">
   <td style="border:1px solid black;">F<br>A<br>D<br>I<br>N<br>G<br><br>F<br>A<br>N<br>T<br>O<br>M</td>
-  <td><img src="contents/cover.png" class="image revealAnim2"></td>
+  <td><img src="contents/cover.png" class="image revealAnim1"></td>
   <td style="border:1px solid black;">T<br>I<br>T<br>L<br>E<br>1<br>2<br>2<br>3<br>4</td>
   </tr>
   
   <tr>
-	<td>
-	<audio id="sound1" src="contents/title12234.mp3" preload="auto"></audio>
-	<button class="play" onclick="stopAudio(); document.getElementById('sound1').play(); document.getElementById('sound1').volume = 0.10;"><span class="play1">►</span></button>
-	</td>
-	<td>title1/and if i did/what then/<br>title2/not sure where to divide it/it's kinda just a bunch/of stuff/<br>title2NEW/like yea man/_sure/depression meal/<br>title3FINALLLL/i could'nt bring myself to do it/<br>title4444444/track03_atempt_03_.wav.mp3.flac.mp3.mp3</td>
-	<td class="time">10:28</td>
-	</tr>
-	</table>
+  <td>
+  <audio id="sound1" src="contents/title12234.mp3" preload="auto"></audio>
+  <button class="play" onclick="stopAudio(); document.getElementById('sound1').play(); document.getElementById('sound1').volume = 0.10; document.getElementById('progress').classList.add('revealAnim2');"><span class="play1">►</span></button>
+  </td>
+  <td>title1/and if i did/what then/<br>title2/not sure where to divide it/it's kinda just a bunch/of stuff/<br>title2NEW/like yea man/_sure/depression meal/<br>title3FINALLLL/i could'nt bring myself to do it/<br>title4444444/track03_atempt_03_.wav.mp3.flac.mp3.mp3</td>
+  <td class="time">10:28</td>
+  </tr>
+  
+  <tr>
+  <td style="border:1px solid black;"></td>
+  <td style="border:1px solid black;">
+  <div style="position: relative; display: inline; margin-left:10px;">
+  <img src="contents/waveform.png" style="height: auto; width: 530px;">
+  <img src="contents/waveform_c.png" style="position: absolute; bottom: 3px; right: 8px; height: auto; width: 530px;" id="progress">
+  </div>
+  </td>
+  <td style="border:1px solid black;"></td>
+  </tr>
+  
+  </table>
 
 	<script>
 	function playSound(url) {
@@ -145,5 +158,4 @@
 	}
 	</script>
   </body>
-
 </html>
