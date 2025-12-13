@@ -1,0 +1,689 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+	<title>The Circuit Breaker Project</title>
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<link href="favicon.png" rel="icon" type="image/png" />
+	<link rel="stylesheet" href="draggable.css?=v18" id="draggable">
+	<link rel="stylesheet" href="main.css?=1" id="maincss">
+	<link rel="prefetch" href="draggable.js?=v6">
+	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+	<meta content="Miraj's Palace" property="og:title" />
+	<meta content="The Circuitbreaker Project" property="og:description" />
+	<meta content="https://mirajspalace.space/circuitbreaker" property="og:url" />
+	<meta content="https://mirajspalace.space/images/mirajspalaceEMBED.png" property="og:image" />
+	<meta content="#462b52" data-react-helmet="true" name="theme-color" />
+</head>
+
+<body background="../images/animspace.gif">
+<div style="position: fixed; color: white; font-family: DOS-V; font-size:12; z-index: 3;" class="stroke">
+recomended horizontal resolution is 1920px at 100% zoom.<br>
+higher or lower resolution may result in windows not displaying in their propper places/text looking blurry.<br>
+hold <span style="color:red">[Shift] </span>to show info.<br>
+hold <span style="color:red">[Ctrl] </span>+ <span style="color:red">[Alt]</span> to hide boxes.<br>
+hold <span style="color:red">[X] </span>to show debug texture.<br>
+</div>
+
+<div id="container" class="container">
+<!-- shadow: -2 width/height -1 top/left -->
+<!--selector_s box-->
+<div class="box shadow" style="width: 188px; height: 138px; top:344px; left:329px; z-index: 1;"></div>
+<div class="box stroke" style="width: 190px; height: 140px; top:345px; left:330px; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('selector_s').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">selector_s</div></div>
+
+<!--1x6 box-->
+<div class="box shadow" style="width: 288px; height: 143px; top:462px; left:479px; z-index: 1;"></div>
+<div class="box stroke" style="width: 290px; height: 145px; top:463px; left:480px; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('a1x6').style.display = 'inline'; playUIint()">
+<div style="position: absolute; bottom: 4px; left: 4px">1x6</div></div>
+
+<!--l-pass_s box-->
+<div class="box shadow" style="width: 66px; height: 68px; top:209px; left:769px; z-index: 1;"></div>
+<div class="box stroke" style="width: 68px; height: 70px; top:210px; left:770px; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('l-pass_s').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">l-pass_s</div></div>
+
+<!--tuner box-->
+<div class="box shadow" style="width: 58px; height: 98px; top:262px; left:814px; z-index: 1;"></div>
+<div class="box stroke" style="width: 60px; height: 100px; top:263px; left:815px; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('tuner').style.display = 'inline'; playUIint()">
+<div style="position: absolute; bottom: 4px; left: 4px">tuner</div></div>
+
+<!--tone_buffer box-->
+<div class="box shadow" style="width: 68px; height: 143px; top:222px; left:879px; z-index: 1;"></div>
+<div class="box stroke" style="width: 70px; height: 145px; top:223px; left:880px; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('tone_buffer').style.display = 'inline'; playUIint()">
+<div style="position: absolute; bottom: 4px; left: 4px">tone_buffer</div></div>
+
+<!--b_neg box-->
+<div class="box shadow" style="width: 73px; height: 178px; top:265px; left:954px; z-index: 1;"></div>
+<div class="box stroke" style="width: 75px; height: 180px; top:266; left:955; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('b_neg').style.display = 'inline'; playUIint()">
+<div style="position: absolute; bottom: 4px; left: 4px">b-</div></div>
+
+<!--synth_1 box-->
+<div class="box shadow" style="width: 148px; height: 108px; top:385px; left:774px; z-index: 1;"></div>
+<div class="box stroke" style="width: 150px; height: 110px; top:386; left:775; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('synth_1').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">synth_1</div></div>
+
+<!--tuner_batt box-->
+<div class="box shadow" style="width: 107px; height: 98px; top:478px; left:930px; z-index: 1;"></div>
+<div class="box stroke" style="width: 109px; height: 100px; top:479; left:931; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('tuner_batt').style.display = 'inline'; playUIint()">
+<div style="position: absolute; bottom: 4px; left: 4px">tuner_batt</div></div>
+
+<!--single box-->
+<div class="box shadow" style="width: 227px; height: 68px; top:659px; left:510px; z-index: 1;"></div>
+<div class="box stroke" style="width: 229px; height: 70px; top:660; left:511; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('single').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">single</div></div>
+
+<!--humbucker box-->
+<div class="box shadow" style="width: 225px; height: 118px; top:819px; left:514px; z-index: 1;"></div>
+<div class="box stroke" style="width: 227px; height: 120px; top:820; left:515; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('humbucker').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">humbucker</div></div>
+
+<!--coil-split box-->
+<div class="box shadow" style="width: 90; height: 83px; top:775px; left:766px; z-index: 1;"></div>
+<div class="box stroke" style="width: 92px; height: 85px; top:778; left:768; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('coil-split').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">coil-split</div></div>
+
+<!--unison box-->
+<div class="box shadow" style="width: 85; height: 38; top:559px; left:763px; z-index: 1;"></div>
+<div class="box stroke" style="width: 87px; height: 40px; top:560; left:764; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('unison').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; right: 4px">unison</div></div>
+
+<!--synth_2 box-->
+<div class="box shadow" style="width: 55px; height: 110px; top:638px; left:929px; z-index: 1;"></div>
+<div class="box stroke" style="width: 57px; height: 112px; top:639; left:930; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('synth_2').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">synth_2</div></div>
+
+<!--matrix box-->
+<div class="box shadow" style="width: 125px; height: 116px; top:835px; left:365px; z-index: 1;"></div>
+<div class="box stroke" style="width: 127px; height: 118px; top:836; left:366; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('matrix').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">matrix</div></div>
+
+<!--toggle_s2 box-->
+<div class="box shadow" style="width: 125px; height: 116px; top:835px; left:365px; z-index: 1;"></div>
+<div class="box stroke" style="width: 60px; height: 30px; top:955; left:410; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('toggle_s2').style.display = 'inline'; playUIint()">
+<div style="position: absolute; bottom: 4px; left: 4px">toggle_s2</div></div>
+
+<!--selector_p box-->
+<div class="box shadow" style="width: 80px; height: 78px; top:809px; left:925px; z-index: 1;"></div>
+<div class="box stroke" style="width: 82px; height: 80px; top:810; left:926; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('selector_p').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">selector_p</div></div>
+
+<!--volume box-->
+<div class="box shadow" style="width: 86px; height: 87px; top:866px; left:775px; z-index: 1;"></div>
+<div class="box stroke" style="width: 88px; height: 89px; top:867; left:776; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('volume').style.display = 'inline'; playUIint()">
+<div style="position: absolute; bottom: 4px; left: 4px">volume</div></div>
+
+<!--mix box-->
+<div class="box shadow" style="width: 80px; height: 74px; top:851px; left:866px; z-index: 1;"></div>
+<div class="box stroke" style="width: 82px; height: 76px; top:852; left:867; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('mix').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">mix</div></div>
+
+<!--l-pass box-->
+<div class="box shadow" style="width: 82px; height: 74px; top:941px; left:909px; z-index: 1;"></div>
+<div class="box stroke" style="width: 84px; height: 76px; top:942; left:910; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('l-pass').style.display = 'inline'; playUIint()">
+<div style="position: absolute; bottom: 4px; left: 4px">l-pass</div></div>
+
+<!--h-pass box-->
+<div class="box shadow" style="width: 82px; height: 84px; top:1033px; left:1021px; z-index: 1;"></div>
+<div class="box stroke" style="width: 84px; height: 86px; top:1034; left:1022; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('h-pass').style.display = 'inline'; playUIint()">
+<div style="position: absolute; bottom: 4px; left: 4px">h-pass</div></div>
+
+<!--switch_power box-->
+<div class="box shadow" style="width: 72; height: 54; top:179; left:891; z-index: 1;"></div>
+<div class="box stroke" style="width: 74; height: 56; top:180; left:892; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('switch_power').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">switch_power</div></div>
+
+<!--tone box-->
+<div class="box shadow" style="width: 52; height: 49; top:996; left:982; z-index: 1;"></div>
+<div class="box stroke" style="width: 54; height: 51; top:997; left:983; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('tone').style.display = 'inline'; playUIint()">
+<div style="position: absolute; bottom: 4px; left: 4px">tone</div></div>
+
+<!--speaker box-->
+<div class="box shadow" style="width: 292; height: 309; top:1149; left:393; z-index: 1;"></div>
+<div class="box stroke" style="width: 294; height: 311; top:1150; left:394; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('speaker').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">speaker</div></div>
+
+<!--kill box-->
+<div class="box shadow" style="width: 98; height: 98; top:1102; left:958; z-index: 1;"></div>
+<div class="box stroke" style="width: 100; height: 100; top:1103; left:959; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('kill').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">kill</div></div>
+
+<!--amp box-->
+<div class="box shadow" style="width: 83; height: 83; top:1024; left:802; z-index: 1;"></div>
+<div class="box stroke" style="width: 85; height: 85; top:1025; left:803; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('amp').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">amp</div></div>
+
+<!--out_main box-->
+<div class="box shadow" style="width: 112; height: 98; top:1153; left:870; z-index: 1;"></div>
+<div class="box stroke" style="width: 114; height: 100; top:1154; left:871; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('out_main').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">out_main</div></div>
+
+<!--out_synth box-->
+<div class="box shadow" style="width: 126; height: 98; top:1235; left:739; z-index: 1;"></div>
+<div class="box stroke" style="width: 128; height: 100; top:1236; left:740; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('out_synth').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">out_synth</div></div>
+
+<!--9v_in box-->
+<div class="box shadow" style="width: 98; height: 98; top:1322; left:680; z-index: 1;"></div>
+<div class="box stroke" style="width: 100; height: 100; top:1323; left:681; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('a9v_in').style.display = 'inline'; playUIint()">
+<div style="position: absolute; bottom: 4px; right: 4px">9v_in</div></div>
+
+<!--loopback box-->
+<div class="box shadow" style="width: 118; height: 148; top:1304; left:1033; z-index: 1;"></div>
+<div class="box stroke" style="width: 120; height: 150; top:1305; left:1034; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('loopback').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">loopback</div></div>
+
+<!--db-09 box-->
+<div class="box shadow" style="width: 138; height: 48; top:1489; left:756; z-index: 1;"></div>
+<div class="box stroke" style="width: 140; height: 50; top:1490; left:757; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('db-09').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">db-09</div></div>
+
+<!--aux box-->
+<div class="box shadow" style="width: 68; height: 48; top:1505; left:664; z-index: 1;"></div>
+<div class="box stroke" style="width: 70; height: 50; top:1506; left:665; z-index: 2;" 
+onmouseenter="this.style.color = 'red'"
+onmouseleave="this.style.color = 'white'"
+onclick="document.getElementById('aux').style.display = 'inline'; playUIint()">
+<div style="position: absolute; top: 4px; left: 4px">aux</div></div>
+
+<!--------------------------------------BACKGROUND IMAGE-------------------------------------->
+<img class="debug" src="guitar_small_demo.png"/>
+<img class="guitar" src="guitar_small.png"/>
+</div>
+
+<!--selector_s-->
+<div id="selector_s" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="selector_s.header" class="headerdiv stroke">&nbsp;&nbsp;String selector&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Switches for selecting strings,<br> 
+  in groups of two(6/5,4/3,2/1),<br> 
+  going to the switch matrix[INT]<br> 
+  or db-09 connector[EXT].
+  </p>
+</div>
+
+<!--1x6-->
+<div id="a1x6" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="a1x6.header" class="headerdiv stroke">&nbsp;&nbsp;1x6 pickup&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  6 single string pickups<br>
+  fitted into a roughly 1<br>
+  humbucker space.
+  </p>
+</div>
+
+<!--l-pass_s-->
+<div id="l-pass_s" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="l-pass_s.header" class="headerdiv stroke">&nbsp;&nbsp;Synth low-pass&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Low-pass control for<br>
+  synth buffer/tone circuit.
+  </p>
+</div>
+
+<!--tone_buffer-->
+<div id="tone_buffer" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="tone_buffer.header" class="headerdiv stroke">&nbsp;&nbsp;Synth tone/buffer&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Buffer and tone for<br>
+  combined synth output.
+  </p>
+</div>
+
+<!--tuner-->
+<div id="tuner" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="tuner.header" class="headerdiv stroke">&nbsp;&nbsp;Tuner&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Tuner, taken apart<br>
+  and infused into the<br>
+  electronics module.
+  </p>
+</div>
+
+<!--b_neg-->
+<div id="b_neg" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="b_neg.header" class="headerdiv stroke">&nbsp;&nbsp;B-&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Negative 3 volt<br>
+  power supply. <br>
+  Very ineffective,<br>
+  but works.
+  </p>
+</div>
+
+<!--synth_1-->
+<div id="synth_1" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="synth_1.header" class="headerdiv stroke">&nbsp;&nbsp;Synth 1&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  My original layout of<br>
+  the shocktave pedal.<br>
+  "if it works, leave it"
+  </p>
+</div>
+
+<!--tuner_batt-->
+<div id="tuner_batt" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="tuner_batt.header" class="headerdiv stroke">&nbsp;&nbsp;Tuner battery&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  My original layout of<br>
+  the shocktave pedal.<br>
+  "if it works, leave it"
+  </p>
+</div>
+
+<!--single-->
+<div id="single" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="single.header" class="headerdiv stroke">&nbsp;&nbsp;Singlecoil&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Just a standard<br>
+  singlecoil pickup.
+  </p>
+</div>
+
+<!--humbucker-->
+<div id="humbucker" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="humbucker.header" class="headerdiv stroke">&nbsp;&nbsp;Humbucker&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  A humbucker pickup<br>
+  with a cut wire to<br>
+  allow for coil splitting
+  </p>
+</div>
+
+<!--coil-split-->
+<div id="coil-split" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="coil-split.header" class="headerdiv stroke">&nbsp;&nbsp;Coil-split switch&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Switch to turn<br>
+  humbucker coilsplit<br>
+  on or off
+  </p>
+</div>
+
+<!--unison-->
+<div id="unison" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="unison.header" class="headerdiv stroke">&nbsp;&nbsp;Unison switch&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  A tiny switch, that<br>
+  feeds synth 2 the<br>
+  same string as synth 1.<br>
+  </p>
+</div>
+
+<!--synth_2-->
+<div id="synth_2" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="synth_2.header" class="headerdiv stroke">&nbsp;&nbsp;Synth 2&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  <img style="border: inset" src="P1050300.png"/><br><br>
+  Second synth, hidding under the pickguard.<br>
+  My new layout of the shocktave pedal.<br>
+  Trivia: harvested of a different project.<br>
+  </p>
+</div>
+
+<!--matrix-->
+<div id="matrix" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="matrix.header" class="headerdiv stroke">&nbsp;&nbsp;Switch matrix&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  6 switches that decide<br>
+  where strings going<br>
+  from [INT] of selector_s.<br>
+  (up - synth_1, down - synth_2)<br>
+  </p>
+</div>
+
+<!--toggle_s2-->
+<div id="toggle_s2" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="toggle_s2.header" class="headerdiv stroke">&nbsp;&nbsp;Toggle synth 2&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  A switch to send strings<br>
+  into the synth 2, effectively<br>
+  turns synth 2 on/off<br>
+  </p>
+</div>
+
+<!--selector_p-->
+<div id="selector_p" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="selector_p.header" class="headerdiv stroke">&nbsp;&nbsp;Pickup selector&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  A standard 5 way<br>
+  pickup selector. With<br>
+  no neck pickup last<br>
+  position acts like mute.<br>
+  </p>
+</div>
+
+<!--volume-->
+<div id="volume" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="volume.header" class="headerdiv stroke">&nbsp;&nbsp;Guitar volume&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Volume potentiometer,<br>
+  unchanged and origianl.<br>
+  </p>
+</div>
+
+<!--mix-->
+<div id="mix" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="mix.header" class="headerdiv stroke">&nbsp;&nbsp;Mix switch&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Switches guitar signal<br>
+  and combined synth<br>
+  signal into a mixer,<br>
+  which outputs the<br>
+  result to out_main.<br>
+  </p>
+</div>
+
+<!--l-pass-->
+<div id="l-pass" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="l-pass.header" class="headerdiv stroke">&nbsp;&nbsp;Guitar low-pass&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Kinda weak low-pass filter,<br>
+  default capacitor is not<br>
+  really enough, but oh well.<br>
+  </p>
+</div>
+
+<!--h-pass-->
+<div id="h-pass" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="h-pass.header" class="headerdiv stroke">&nbsp;&nbsp;Guitar high-pass&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Very strong high-pass filter,<br>
+  kinda just picked random<br>
+  capacitor, so i guess if<br>
+  it works it works.<br>
+  </p>
+</div>
+
+<!--switch_power-->
+<div id="switch_power" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="switch_power.header" class="headerdiv stroke">&nbsp;&nbsp;Power switch&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Main power switch for:<br>
+  - synth_1<br>
+  - synth_2<br>
+  - b-<br>
+  - tone_buffer<br>
+  - mix(mixer)<br>
+  </p>
+</div>
+
+<!--tone-->
+<div id="tone" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="tone.header" class="headerdiv stroke">&nbsp;&nbsp;Tone switch&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Engages the tone stack<br>
+  (l-pass and h-pass)<br>
+  before sending guitar<br>
+  signal to volume.<br>
+  </p>
+</div>
+
+<!--speaker-->
+<div id="speaker" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="speaker.header" class="headerdiv stroke">&nbsp;&nbsp;Speaker&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Speaker for the amplifier,<br>
+  gets pretty loud.<br>
+  <span style="color: gray;">sounds like 
+  <span style="background-color: gray;">shit</span> tho.</span><br>
+  </p>
+</div>
+
+<!--kill-->
+<div id="kill" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="kill.header" class="headerdiv stroke">&nbsp;&nbsp;Kill switch&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Cuts signal to out_main
+  </p>
+</div>
+
+<!--amp-->
+<div id="amp" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="amp.header" class="headerdiv stroke">&nbsp;&nbsp;Amplifier&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  This is really only a button to turn on <br>
+  the amplifier, but im not coding in the <br>
+  back side of the guitar lmao;<br>
+  All there is anyway for it is<br>
+  a volume control.<br>
+  Amp it self is some kind of cheap <br>
+  module i ordered from somewhere.<br><br>
+  <img style="border: inset" src="P1050306.png"/><br>
+  </p>
+</div>
+
+<!--out_main-->
+<div id="out_main" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="out_main.header" class="headerdiv stroke">&nbsp;&nbsp;Main output&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Well yea.<br>
+  Main output.<br>
+  </p>
+</div>
+
+<!--out_synth-->
+<div id="out_synth" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="out_synth.header" class="headerdiv stroke">&nbsp;&nbsp;Synth output&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Deafult output for<br>
+  combined synth output.<br>
+  </p>
+</div>
+
+<!--9v_in-->
+<div id="a9v_in" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="a9v_in.header" class="headerdiv stroke">&nbsp;&nbsp;9 volts input&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Center positive,<br>
+  the way it should be.<br>
+  </p>
+</div>
+
+<!--loopback-->
+<div id="loopback" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="loopback.header" class="headerdiv stroke">&nbsp;&nbsp;Effect loopback&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Connect your effect pedals <br>
+  in to out_main, and effects <br>
+  out to here, and BOOM! <br>
+  Effect applied to <br>
+  amplifiers input.<br>
+  </p>
+</div>
+
+<!--db-09-->
+<div id="db-09" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="db-09.header" class="headerdiv stroke">&nbsp;&nbsp;[EXT] module connector&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  A db-09 connector for external modules<br>
+  (right now there is no external modules) <br>
+  it caries all 6 strings, ground, <br>
+  return signal from the module, <br>
+  and one pin is not connected.<br>
+  </p>
+</div>
+
+<!--aux-->
+<div id="aux" class="maindiv" style="display: none;">
+<img src="favicon.png" height="auto" width="16" class="alignLeft"/>
+<input type="image" src="../images/crossButton.png" onclick="this.parentElement.style.display='none'; playUIbad()" class="alignRight"/>
+  <div id="aux.header" class="headerdiv stroke">&nbsp;&nbsp;AUX jack&nbsp;&nbsp;</div>
+  <p class="windowContents">
+  Regular stereo(L and R wires together) <br>
+  aux jack, there is a switch that switches <br>
+  amp output from speaker to this jack.<br>
+  (potentialy volume warning)<br>
+  <img style="border: inset" src="P1050305.png"/><br><br>
+  </p>
+</div>
+
+<audio id="mp_ui_int" src="snd/mp_ui_int.wav" preload="auto"></audio>
+<audio id="mp_ui_bad" src="snd/mp_ui_bad.wav" preload="auto"></audio>
+
+<script>
+function playUIint() {
+  document.getElementById('mp_ui_int').play();
+  document.getElementById('mp_ui_int').volume = 0.10;
+}
+function playUIbad() {
+  document.getElementById('mp_ui_bad').play();
+  document.getElementById('mp_ui_bad').volume = 0.10;
+}
+</script>
+
+<script src="draggable.js"></script>
+<script src="hiddable.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+/*general*/
+@font-face {
+  font-family: Sharp;
+  src: url('Px437_Sharp_PC3K.ttf'); 
+  font-smooth: never;
+}
+.alignRight {
+  display: block;
+  position: absolute;
+  top: 3px;
+  right: 2px;
+}
+.alignLeft {
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+.windowContents {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+/*reusables*/
+.maindiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #C0C0C0;
+  border-style: outset;
+  border-width: 2px;
+  text-align: left;
+  font-family: Sharp;
+  font-size: 8;
+}
+.headerdiv {
+  cursor: move;
+  z-index: 10;
+  background-image: linear-gradient(to right, #99991D, #CEC927, #CEC927);
+  color: #fff;
+  font-family: Sharp;
+  font-size: 8;
+  padding:5px;
+}
+
+/*windows*/
+#selector_s {
+  left: round(nearest, 350px, 1px);
+   top: round(nearest, 286px, 1px);
+}
+#a1x6 {
+  left: round(nearest, 490px, 1px);
+   top: round(nearest, 545px, 1px);
+}
+#l-pass_s {
+  left: round(nearest, 820px, 1px);
+   top: round(nearest, 245px, 1px);
+}
+#tone_buffer {
+  left: round(nearest, 990px, 1px);
+   top: round(nearest, 145px, 1px);
+}
+#tuner {
+  left: round(nearest, 851px, 1px);
+   top: round(nearest, 345px, 1px);
+}
+#b_neg {
+  left: round(nearest, 1359px, 1px);
+   top: round(nearest, 300px, 1px);
+}
+#synth_1 {
+  left: round(nearest, 1084px, 1px);
+   top: round(nearest, 290px, 1px);
+}
+#tuner_batt {
+  left: round(nearest, 1362px, 1px);
+   top: round(nearest, 467px, 1px);
+}
+#single {
+  left: round(nearest, 602px, 1px);
+   top: round(nearest, 615px, 1px);
+}
+#humbucker {
+  left: round(nearest, 576px, 1px);
+   top: round(nearest, 780px, 1px);
+}
+#coil-split {
+  left: round(nearest, 1112px, 1px);
+   top: round(nearest, 704px, 1px);
+}
+#unison {
+  left: round(nearest, 1184px, 1px);
+   top: round(nearest, 618px, 1px);
+}
+#synth_2 {
+  left: round(nearest, 1321px, 1px);
+   top: round(nearest, 667px, 1px);
+}
+#matrix {
+  left: round(nearest, 509px, 1px);
+   top: round(nearest, 709px, 1px);
+}
+#toggle_s2 {
+  left: round(nearest, 585px, 1px);
+   top: round(nearest, 1018px, 1px);
+}
+#selector_p {
+  left: round(nearest, 1371px, 1px);
+   top: round(nearest, 802px, 1px);
+}
+#volume {
+  left: round(nearest, 1023px, 1px);
+   top: round(nearest, 1014px, 1px);
+}
+#mix {
+  left: round(nearest, 1147px, 1px);
+   top: round(nearest, 746px, 1px);
+}
+#l-pass {
+  left: round(nearest, 1349px, 1px);
+   top: round(nearest, 900px, 1px);
+}
+#h-pass {
+  left: round(nearest, 1376px, 1px);
+   top: round(nearest, 992px, 1px);
+}
+#switch_power {
+  left: round(nearest, 1210px, 1px);
+   top: round(nearest, 89px, 1px);
+}
+#tone {
+  left: round(nearest, 1200px, 1px);
+   top: round(nearest, 917px, 1px);
+}
+#speaker {
+  left: round(nearest, 476px, 1px);
+   top: round(nearest, 1141px, 1px);
+}
+#kill {
+  left: round(nearest, 1408px, 1px);
+   top: round(nearest, 1170px, 1px);
+}
+#amp {
+  left: round(nearest, 837px, 1px);
+   top: round(nearest, 964px, 1px);
+}
+#out_main {
+  left: round(nearest, 1120px, 1px);
+   top: round(nearest, 1075px, 1px);
+}
+#out_synth {
+  left: round(nearest, 1208px, 1px);
+   top: round(nearest, 1314px, 1px);
+}
+#a9v_in {
+  left: round(nearest, 943px, 1px);
+   top: round(nearest, 1259px, 1px);
+}
+#loopback {
+  left: round(nearest, 1350px, 1px);
+   top: round(nearest, 1234px, 1px);
+}
+#db-09 {
+  left: round(nearest, 1102px, 1px);
+   top: round(nearest, 1373px, 1px);
+}
+#aux {
+  left: round(nearest, 930px, 1px);
+   top: round(nearest, 1178px, 1px);
+}

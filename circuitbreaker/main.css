@@ -1,0 +1,67 @@
+@font-face {
+  font-family: DOS-V;
+  src: url('Px437_DOS-V_re_JPN12.ttf'); 
+  font-smooth: never;
+}
+body {
+  background-color: 000000;
+  image-rendering: pixelated;
+  background: url(../images/animspace.gif);
+  min-height:1625px;
+}
+img.guitar {
+  display: block;
+  position: static;
+  z-index: -1;
+}
+img.debug {
+  display: none;
+  position: static;
+  z-index: -1;
+}
+div.container {
+  position: relative; 
+  top: round(up, 0.5px, 1px);
+  left:round(nearest, calc(50vw - 670px), 0.901px);
+  width: 1268px; 
+  height: 1625px;
+  border-style: inset;
+}
+div.box {
+  position: absolute;
+  border: 4px solid;
+  padding: 4px;
+  color: white;
+  font-family: DOS-V;
+  font-size:12;
+  cursor: pointer;
+}
+div.shadow {
+  position: absolute;
+  border: 7px solid;
+  padding: 4px;
+  color: black;
+}
+.stroke {
+	text-shadow:
+	-1px -1px 0 #000,
+     0   -1px 0 #000,
+     2px -1px 0 #000,
+     2px  0   0 #000,
+     2px  2px 0 #000,
+     0    2px 0 #000,
+    -1px  2px 0 #000,
+    -1px  0   0 #000,
+	
+     1px -1px 0 #000,
+     1px  0   0 #000,
+     1px  1px 0 #000,
+     0    1px 0 #000,
+    -1px  1px 0 #000;
+}
+#cursorText{
+    position:absolute;
+	font-family: DOS-V;
+	color: white;
+	font-size:12;
+}
