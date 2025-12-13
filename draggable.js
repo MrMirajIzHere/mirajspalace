@@ -12,7 +12,6 @@ dragElement(document.getElementById("embed"));
 dragElement(document.getElementById("noai"));
 dragElement(document.getElementById("reswarn"));
 dragElement(document.getElementById("plant"));
-dragElement(document.getElementById("linksL"));
 dragElement(document.getElementById("circuitbreaker"));
 
 function dragElement(elmnt) {
