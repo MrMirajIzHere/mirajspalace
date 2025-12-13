@@ -40,6 +40,23 @@
   font-size: 8;
   padding:5px;
 }
+.stroke {
+	text-shadow:
+	-1px -1px 0 #000,
+     0   -1px 0 #000,
+     2px -1px 0 #000,
+     2px  0   0 #000,
+     2px  2px 0 #000,
+     0    2px 0 #000,
+    -1px  2px 0 #000,
+    -1px  0   0 #000,
+	
+     1px -1px 0 #000,
+     1px  0   0 #000,
+     1px  1px 0 #000,
+     0    1px 0 #000,
+    -1px  1px 0 #000;
+}
 
 /*windows*/
 #title {
@@ -49,6 +66,10 @@
 #aboutme {
    top: round(nearest, calc(43vh - 234px), 1px);
   left: round(nearest, calc(34vw - 332px), 1px);
+}
+#circuitbreaker {
+   top: round(nearest, calc(44vh - 144px), 1px);
+  left: round(nearest, calc(35vw - 242px), 1px);
 }
 #stuff {
    top: round(nearest, calc(138vh - 725px), 1px);
