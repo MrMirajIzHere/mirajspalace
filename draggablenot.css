@@ -40,6 +40,23 @@
   font-size: 8;
   padding:5px;
 }
+.stroke {
+	text-shadow:
+	-1px -1px 0 #000,
+     0   -1px 0 #000,
+     2px -1px 0 #000,
+     2px  0   0 #000,
+     2px  2px 0 #000,
+     0    2px 0 #000,
+    -1px  2px 0 #000,
+    -1px  0   0 #000,
+	
+     1px -1px 0 #000,
+     1px  0   0 #000,
+     1px  1px 0 #000,
+     0    1px 0 #000,
+    -1px  1px 0 #000;
+}
 
 /*windows*/
 #title {
@@ -49,6 +66,10 @@
 #aboutme {
    top: 194px;
   left: 305px;
+}
+#circuitbreaker {
+   top: 287px;
+  left: 441px;
 }
 #stuff {
    top: 648px;
@@ -93,4 +114,5 @@
 #plant {
    top: 156px;
   left: 1320px;
+
 }
