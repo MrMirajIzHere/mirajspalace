@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+	<title>Gallery</title>
+	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+	<link href="/images/favicon.png" rel="icon" type="image/png" />
+	<meta content="Miraj's Palace" property="og:title" />
+	<meta content="ParT 0F a Gal1eRy!!1!" property="og:description" />
+	<meta content="http://mirajspalace.space" property="og:url" />
+	<meta content="http://mirajspalace.space/images/mirajspalaceEMBED.png" property="og:image" />
+</head>
+<body background="../images/animspace.gif" cellpadding="0" cellspacing="0" style="table: " width="100%">
+	<hr/>
+	<p align="center"><strong><span style="font-size: 48px; color: #ffffff; background-color: #464637" id="gallery">&nbsp;Gallery 01&nbsp;</span></strong></p>
+	<p align="center"><span style="font-size: 24px; color: #ffffff;">&nbsp;some may take time to load&nbsp;</span></p>
+	
+	<div style="position: relative">
+	<div style="position: absolute; display: none; color: white; font-size:24; background-color: #000000; left: round(nearest, calc(50vw - 154px), 1px)" id="affText">
+	&nbsp;not affiliated with Liminality&nbsp;
+	</div>
+	<p align="center"><img id="image" src="" style="height: 730px"/></p>
+	</div>
+	
+	<p align="center">
+	<a href="#" id="backButton"><img height="61" width="120" src="../images/backlightening.gif"/></a>
+	<a href="#" id="nextButton"><img height="61" width="120" src="../images/next89.gif"/></a>
+	</p>
+	<hr/>
+	<script>
+	const urlParams = new URLSearchParams(window.location.search);
+	const page = parseInt(urlParams.get('page')) || 1;
+	const imageMap = {
+    '1': 'https://lh3.googleusercontent.com/d/1BfdBFOYbNXf0YsHTEarzULFU43AucC40=s0',
+    '2': 'https://lh3.googleusercontent.com/d/11_24K8_U37j-GQGxseZDrTFCLWsGh80k=s0',
+    '3': 'https://lh3.googleusercontent.com/d/1ow42tzAgdKgKdD3BTgvAwRlsfEAxZKH-=s0',
+    '4': 'https://lh3.googleusercontent.com/d/18JjJItFT32QNWM6o8TjA0GXvdgvZ71gq=s0',
+	'5': 'https://lh3.googleusercontent.com/d/1PcVi5MIm8rHIW3AqSRSRkqOJ2Ght9pHA=s0',
+    '6': 'https://lh3.googleusercontent.com/d/18N48odteQEfrojowL6W0NCcqDnK5HWdx=s0',
+    '7': 'https://lh3.googleusercontent.com/d/14rASBT7HuopWzTdHmd4j7sh_jzvoMqnQ=s0',
+    '8': 'https://lh3.googleusercontent.com/d/1SJnremD_9WZje6UZ5Duj0_hOp8qneDKu=s0',
+    '9': 'https://lh3.googleusercontent.com/d/1ybIF-GYGP58sowCWMEAAStE37Hk3fM5-=s0', //lim
+    '10': 'https://lh3.googleusercontent.com/d/1827h814oVJxx_yBhP1HXAJppiabfz5CW=s0', //lim
+    '11': 'https://lh3.googleusercontent.com/d/12jLjNU1Kj-qv9GxjcL9ygYXWNFsM6dmc=s0',
+    '12': 'https://lh3.googleusercontent.com/d/1TWv3VEp2ssmLCsDBihQeOHKecCFT_7O7=s0',
+	'13': 'https://lh3.googleusercontent.com/d/1aYUch83Qw5Rl7Da8MMpF7e-dAuXzneNv=s0',
+    '14': 'https://lh3.googleusercontent.com/d/12Sh6jKnV2xVMuSIVuRNBb8c3FCuK0D8f=s0',
+    '15': 'https://lh3.googleusercontent.com/d/1NpsXCo-IpcYm4mk9e_WuLiNUmyaWgigm=s0',
+	};
+	
+	const imgElement = document.getElementById('image');
+	imgElement.src = imageMap[page];
+	
+	function changePage(newPage) {
+     if (newPage < 1) return;
+     window.location.href = `?page=${newPage}`;
+	 }
+	
+	document.getElementById('backButton').addEventListener('click', function(e) {
+	 e.preventDefault();
+     changePage(page - 1);
+	});
+	
+	document.getElementById('nextButton').addEventListener('click', function(e) {
+     e.preventDefault();
+     changePage(page + 1);
+	});
+	
+	const affTextElement = document.getElementById('affText');
+	if (affTextElement) {
+    if (page === 9 || page === 10) {
+        affTextElement.style.display = 'block';
+    } else {
+        affTextElement.style.display = 'none';
+    }
+	}
+	
+	const galleryElement = document.getElementById('gallery');
+	galleryElement.innerHTML = `&nbsp;Gallery ${page.toString().padStart(2, '0')}&nbsp;`;
+	</script>
+</body>
+</html>
