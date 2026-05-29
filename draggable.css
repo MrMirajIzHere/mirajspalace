@@ -69,11 +69,11 @@
 }
 #circuitbreaker {
    top: round(nearest, calc(44vh - 144px), 1px);
-  left: round(nearest, calc(37vw - 242px), 1px);
+  left: round(nearest, calc(40vw - 242px), 1px);
 }
 #stuff {
    top: round(nearest, calc(138vh - 725px), 1px);
-  left: round(nearest, calc(51vw - 445px), 1px);
+  left: round(nearest, calc(53vw - 445px), 1px);
 }
 #music {
    top: round(nearest, calc(86vh - 406px), 1px);
