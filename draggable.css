@@ -65,11 +65,11 @@
 }
 #aboutme {
    top: round(nearest, calc(43vh - 234px), 1px);
-  left: round(nearest, calc(34vw - 332px), 1px);
+  left: round(nearest, calc(36vw - 332px), 1px);
 }
 #circuitbreaker {
    top: round(nearest, calc(44vh - 144px), 1px);
-  left: round(nearest, calc(35vw - 242px), 1px);
+  left: round(nearest, calc(37vw - 242px), 1px);
 }
 #stuff {
    top: round(nearest, calc(138vh - 725px), 1px);
