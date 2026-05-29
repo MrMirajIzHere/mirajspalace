@@ -73,11 +73,11 @@
 }
 #stuff {
    top: round(nearest, calc(138vh - 725px), 1px);
-  left: round(nearest, calc(53vw - 445px), 1px);
+  left: round(nearest, calc(47vw - 445px), 1px);
 }
 #music {
    top: round(nearest, calc(86vh - 406px), 1px);
-  left: round(nearest, calc(57vw - 473px), 1px);
+  left: round(nearest, calc(60vw - 473px), 1px);
 }
 #funstuff {
    top: round(nearest, calc(153vh - 878px), 1px);
