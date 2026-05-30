@@ -20,24 +20,23 @@
 <body background="images/animspace.gif" link="#FF0000" vlink="#7F7F7F">
 	<hr style="color:ffffff">
 	<span style="text-align: center; line-height:2; display: block; margin: auto; font-family: Sharp; image-rendering: pixelated; color: #ffffff; ">
-	plese fill out all fields<br><br>
+	<br>
     <label for="input">LINK TO GOOGLE DRIVE IMAGE:</label><br>
     <input type="text" id="link" size="63" placeholder="https://drive.google.com/file/d/11tsEHD_4OdDei0YFgZUmeansZFPmT58X/view"><br><br>
 	<label for="input">SIZE (pixels):</label><br>
 	<input type="text" id="size" placeholder="1000"><br><br>
     <input type="submit" value="submit" onclick="submit()">
-	<br>
-	<br>
+	<br><br>
 	OUTPUT:
+	<hr style="color:ffffff">
 	<div id="output">
-		<hr style="color:ffffff">
-		thumbnail vertical:<br>
+		<span style="text-decoration-line: underline">thumbnail height:</span><br>
 		<span id="verticalOut"></span><br>
 		<hr style="color:ffffff">
-		thumbnail horizontal:<br>
+		<span style="text-decoration-line: underline">thumbnail width:</span><br>
 		<span id="horizontalOut"></span><br>
 		<hr style="color:ffffff">
-		lh3:<br>
+		<span style="text-decoration-line: underline">lh3:</span><br>
 		<span id="lh3Out"></span><br>
 		<hr style="color:ffffff">
 	</div>
@@ -46,7 +45,16 @@
 <script>
 function submit() {
 	let glink = document.getElementById('link').value;
-	let size = document.getElementById('size').value
+	let size = document.getElementById('size').value;
+	
+	// Use placeholder values if fields are empty
+	if (!glink || glink.trim() === '') {
+		glink = document.getElementById('link').placeholder;
+	}
+	
+	if (!size || size.trim() === '') {
+		size = document.getElementById('size').placeholder;
+	}
 
 	console.log("Full link: " + glink);
 	console.log("Size: " + size);
