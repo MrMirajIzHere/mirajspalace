@@ -1,50 +1,55 @@
-//draggable divs
-dragElement(document.getElementById("title"));
-dragElement(document.getElementById("aboutme"));
-dragElement(document.getElementById("stuff"));
-dragElement(document.getElementById("music"));
-dragElement(document.getElementById("forum"));
-dragElement(document.getElementById("funstuff"));
-dragElement(document.getElementById("blog"));
-dragElement(document.getElementById("info"));
-dragElement(document.getElementById("links"));
-dragElement(document.getElementById("embed"));
-dragElement(document.getElementById("noai"));
-dragElement(document.getElementById("reswarn"));
-dragElement(document.getElementById("plant"));
-dragElement(document.getElementById("circuitbreaker"));
-
 function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    elmnt.onmousedown = dragMouseDown;
-  }
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    var header = document.getElementById(elmnt.id + "header");
+    
+    if (header) {
+        header.onmousedown = dragMouseDown;
+    } else {
+        elmnt.onmousedown = dragMouseDown;
+    }
 
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    document.onmousemove = elementDrag;
-  }
+    function getPositionAsPercentage(element) {
+        var parent = element.parentElement;
+        if (!parent) parent = document.body;
+        
+        var leftPercent = (element.offsetLeft / parent.clientWidth) * 100;
+        var topPercent = (element.offsetTop / parent.clientHeight) * 100;
+        
+        return { left: leftPercent, top: topPercent };
+    }
 
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-	
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-  }
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
 
-  function closeDragElement() {
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        
+        var newTop = elmnt.offsetTop - pos2;
+        var newLeft = elmnt.offsetLeft - pos1;
+        
+        var parent = elmnt.parentElement;
+        if (!parent) parent = document.body;
+        
+        var topPercent = (newTop / parent.clientHeight) * 100;
+        var leftPercent = (newLeft / parent.clientWidth) * 100;
+        
+        elmnt.style.top = topPercent + "%";
+        elmnt.style.left = leftPercent + "%";
+    }
+
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
 }

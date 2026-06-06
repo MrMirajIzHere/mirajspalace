@@ -10,14 +10,30 @@ function drop(e) {
     }
 
     var waterCanD = e.dataTransfer.getData("text");
-	if (waterCanD != "waterCan") {
-		console.log(waterCanD + " is not a draggable")
-	} else {
-	var moldId = (e.target.id || e.target.parentElement.id || e.target.parentElement.parentElement.id || e.target.parentElement.parentElement.parentElement.id)
-	console.log(waterCanD + " dropped on " + moldId);
-	/*example id="blogMold"*/
-	document.getElementById(moldId + "Mold").style.display = 'block'
-	}
+    if (waterCanD != "waterCan") {
+        console.log(waterCanD + " is not a draggable");
+    } else {
+        let target = e.target;
+        let moldId = null;
+        
+        while (target && target !== document.body) {
+            if (target.id && target.id.endsWith && !target.id.endsWith("Mold")) {
+                if (target.classList && (target.classList.contains('maindiv') || target.classList.contains('console'))) {
+                    moldId = target.id;
+                    break;
+                }
+            }
+            target = target.parentElement;
+        }
+        
+        if (moldId) {
+            console.log(waterCanD + " dropped on " + moldId);
+            const moldElement = document.getElementById(moldId + "Mold");
+            if (moldElement) {
+                moldElement.style.display = 'block';
+            }
+        }
+    }
 }
 
 function allowDrop(e) {
