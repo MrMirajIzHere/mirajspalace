@@ -9,6 +9,11 @@ function createWindow(config) {
     const customClass = config.customClass || "maindiv";
     const extraStyle = config.extraStyle || "";
     const onDrop = config.onDrop !== false;
+	let doubleSpace = "";
+	
+	if(iconLeft !== null){
+	doubleSpace = "&nbsp;&nbsp;";
+	}
     
     let html = `<div id="${id}" class="${customClass}"${onDrop ? ' ondrop="drop(event)" ondragover="allowDrop(event)"' : ''} style="${extraStyle}">`;
     
@@ -21,12 +26,11 @@ function createWindow(config) {
     }
     
     // mold
-    html += `<span id="${id}Mold" style="display: none">
-<img src="${moldImage}" style="top: 50px; ${moldPos}; display: block; position: absolute; transform: scale(2); pointer-events: none" class="revealAnim"/></span>`;
+    html += `<span id="${id}Mold" style="display: none"><img src="${moldImage}" style="top: 50px; ${moldPos}; display: block; position: absolute; transform: scale(2); pointer-events: none" class="revealAnim"/></span>`;
     
     // header things
     html += `<div id="${id}header" class="headerdiv ${headerClass}" style="${headerStyle}">`;
-    html += `&nbsp;&nbsp;${title}&nbsp;&nbsp;`;
+    html += `${doubleSpace}${title}&nbsp;&nbsp;&nbsp;`;
     html += `</div>`;
     
     // the juice
