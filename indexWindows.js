@@ -113,7 +113,7 @@ const windows = [
         moldImage: "images/othervines/vinesblogy.png",
         content: `
             <p>&nbsp;Probably the most&nbsp;<br>&nbsp;important part of&nbsp;<br>&nbsp;this website, and&nbsp;<br>&nbsp;the only one i&nbsp;<br>&nbsp;actively use&nbsp;<p>
-            <a href="blogboard.htm" style="text-align: center; display: block;"><img src="images/2024034319.png?=v2" style="height: auto; width: auto;"><br><p>View BLOG</a></p>
+            <a href="blog.mirajspalace.space/index.htm" style="text-align: center; display: block;"><img src="images/2024034319.png?=v2" style="height: auto; width: auto;"><br><p>View BLOG</a></p>
         `
     },
     
