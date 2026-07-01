@@ -1,12 +1,18 @@
-	@font-face {
-	font-family: Sharp;
-	src: url('Px437_Sharp_PC3K.ttf'); 
-	font-smooth: never;
+.window-content {
+  padding: 0;
+  margin: 0;
 }
-	@font-face {
-	font-family: IBM;
-	src: url('IBM_EGA.TTF'); 
-	font-smooth: never;
+.alignRight {
+  display: block;
+  position: absolute;
+  top: 3px;
+  right: 2px;
+}
+.alignLeft {
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 2px;
 }
 
 /*reusables*/
@@ -39,23 +45,6 @@
   font-family: Sharp;
   font-size: 8;
   padding:5px;
-}
-.stroke {
-	text-shadow:
-	-1px -1px 0 #000,
-     0   -1px 0 #000,
-     2px -1px 0 #000,
-     2px  0   0 #000,
-     2px  2px 0 #000,
-     0    2px 0 #000,
-    -1px  2px 0 #000,
-    -1px  0   0 #000,
-	
-     1px -1px 0 #000,
-     1px  0   0 #000,
-     1px  1px 0 #000,
-     0    1px 0 #000,
-    -1px  1px 0 #000;
 }
 
 /*windows*/
