@@ -10,8 +10,8 @@
     if (isMobile || isZoomed || isSmallScreen) {
         document.write(`
 <div style="position: fixed; color: white; font-family: DOS-V; font-size:24; z-index: 30;" class="stroke2 reswarn">
-recomended horizontal resolution is <span style="color:red">1920px </span>at <span style="color:red">100% zoom</span><br>
-recomended browser <span style="color:red">Firefox </span>on a <span style="color:red">computer</span><br>
+recommended horizontal resolution is <span style="color:red">1920px </span>at <span style="color:red">100% zoom</span><br>
+recommended browser <span style="color:red">Firefox </span>on a <span style="color:red">computer</span><br>
 click <a style="color:blue" onclick="this.parentElement.style.display = 'none';" href="#">[Here]</a> to hide this warning<br>
 </div>`);
     }
