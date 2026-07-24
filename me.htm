@@ -24,6 +24,7 @@
     -2px  2px 0 #000,
     -2px  0   0 #000;
 }
+
 .nb {
 background-image: url("images/flags/nb.png");
 background-size: 100% 100%;
@@ -40,72 +41,138 @@ background-size: 100% 100%;
 background-image: url("images/flags/queer.png");
 background-size: 100% 100%;
 }
+
+div.scroll-container {
+  background-color: #000;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+div.scroll-container img {
+  padding: 10px;
+}
+
+@keyframes transitionIn {
+	from {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+	}
+	to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+	}
+	}
+	
+	.revealAnim {
+	animation: play 0.5s steps(6, end);
+	animation-name: transitionIn;
+	animation-fill-mode: forwards none;
+	}
+	
+	.dropbtn {
+	background-color: #000000;
+	color: yellow;
+	border: none;
+	}
+	
+	.dropdown {
+	position: relative;
+	display: inline-block;
+	}
+	
+	.dropdown-content {
+	display: none;
+	position: absolute;
+	z-index: 1;
+	left: 50%;
+	transform: translateX(-50%);
+	}
+	
+	.dropdown:hover .dropdown-content {display: block;}
 </style>
 <body background="images/animspace.gif" style="image-rendering: pixelated;" width="100%">
 
-			<hr />
-			<p align="center">
-			<strong><span style="font-size: 48px; color: #ffff00; background-color: #4b0082">&nbsp;Ab0ut meeeee :3&nbsp;</span></strong></p>
+ <hr />
+ <p align="center">
+ <strong><span style="font-size: 48px; color: #ffff00; background-color: #4b0082">&nbsp;Ab0ut meeeee :3&nbsp;</span></strong></p>
 
-			<p align="center"><img src="https://drive.google.com/thumbnail?id=1BIxoQBdihParDx1kRJxlQtrauQvWKAeJ&sz=w800" style="width: 800px"/></p>
+ <p align="center"><img src="https://drive.google.com/thumbnail?id=1BIxoQBdihParDx1kRJxlQtrauQvWKAeJ&sz=w800" style="width: 800px"/></p>
 
-			<p align="center" class="stroke">
-			<span style="font-size: 22px; font-family: trebuchet ms,helvetica,sans-serif; color: #ffffff; background-color: #000000;">
-			&nbsp;Miraj [mi-raazh] (or MJ) | they<span span style="font-size: 11px;">/he</span> |<span class="nb">&nbsp;non-binary&nbsp;</span><br>
-			<span class="ace">&nbsp;asexual&nbsp;</span>|<span class="aro">&nbsp;cupioromantic&nbsp;</span>|<span class="queer">&nbsp;queer&nbsp;</span><br>
-			&nbsp;coder if need be | artist if need be&nbsp;<br>
-			&nbsp;furry | multifandom&nbsp;<br>
-			&nbsp;All of my links: <a href="https://links.mirajspalace.space">https://links.mirajspalace.space</a>&nbsp;<br>
-			&nbsp;Things i own: <a href="https://mirajspalace.space/mystuff.htm">https://mirajspalace.space/mystuff.htm</a>&nbsp;
-			</span>
-			</p>
+ <p align="center" class="stroke">
+ <span style="font-size: 22px; font-family: trebuchet ms,helvetica,sans-serif; color: #ffffff; background-color: #000000;">
+ &nbsp;Miraj [mi-raazh] (or MJ) | they<span span style="font-size: 11px;">/he</span> |<span class="nb">&nbsp;non-binary&nbsp;</span><br>
+ <span class="ace">&nbsp;asexual&nbsp;</span>|<span class="aro">&nbsp;cupioromantic&nbsp;</span>|<span class="queer">&nbsp;queer&nbsp;</span><br>
+ &nbsp;coder if need be | artist if need be&nbsp;<br>
+ &nbsp;furry | multifandom&nbsp;<br>
+ &nbsp;All of my links: <a href="https://links.mirajspalace.space">https://links.mirajspalace.space</a>&nbsp;<br>
+ &nbsp;Things i own: <a href="https://mirajspalace.space/mystuff.htm">https://mirajspalace.space/mystuff.htm</a>&nbsp;
+ </span>
+ </p>
 
-			<p align="center">&nbsp;</p>
-			
-			<p align="center">
-			<span style="font-size: 22px; font-family: trebuchet ms,helvetica,sans-serif; color: #ffffff; background-color: #000000">
-			&nbsp;88x31 badges&nbsp;
-			</span></p>
-			
-			<p align="center">
-			<a href="https://mirajspalace.space" title="Miraj's Palace"><img border="0" height="31" width="88"  src="https://mirajspalace.space/images/palaceGIF.gif" /></a>
-			<img border="0" height="31" width="88" src="images/stuffs/acab.gif"/>
-			<img border="0" height="31" width="88" src="images/stuffs/anarchynow.gif"/>
-			<img border="0" height="31" width="88" src="images/stuffs/madewithtwopaws.gif"/>
-			<img border="0" height="31" width="88" src="images/stuffs/nowebp.gif"/>
-			<img border="0" height="31" width="88" src="images/stuffs/nb_noproblem.jpg"/>
-			<img border="0" height="31" width="88" src="images/stuffs/thevoid.gif"/><br>
-			<img border="0" height="31" width="88" src="images/stuffs/they-them.gif"/>
-			<img border="0" height="31" width="88" src="images/stuffs/css-is-difficult.gif"/>
-			<img border="0" height="31" width="88" src="images/stuffs/bestvw.gif"/>
-			<a href="https://archive.org/"><img border="0" height="31" width="88" src="images/stuffs/preserve.gif"/></a>
-			<a href="http://wiby.org/"><img border="0" height="31" width="88" src="http://wiby.org/about/wiby.org.gif"/></a>
-			<a href="https://www.aimp.ru/"><img border="0" height="31" width="88"  src="https://www.aimp.ru/images/88x31.png"/></a>
-			</p>
-			
-			<p align="center">&nbsp;</p>
+ <p align="center">&nbsp;</p>
+ 
+ <p align="center">
+ <span style="font-size: 22px; font-family: trebuchet ms,helvetica,sans-serif; color: #ffffff; background-color: #000000">
+ &nbsp;88x31 badges&nbsp;
+ </span></p>
+ 
+ <p align="center">
+ <a href="https://mirajspalace.space" title="Miraj's Palace"><img border="0" height="31" width="88"  src="https://mirajspalace.space/images/palaceGIF.gif" /></a>
+ <img border="0" height="31" width="88" src="images/stuffs/acab.gif"/>
+ <img border="0" height="31" width="88" src="images/stuffs/anarchynow.gif"/>
+ <img border="0" height="31" width="88" src="images/stuffs/madewithtwopaws.gif"/>
+ <img border="0" height="31" width="88" src="images/stuffs/nowebp.gif"/>
+ <img border="0" height="31" width="88" src="images/stuffs/nb_noproblem.jpg"/>
+ <img border="0" height="31" width="88" src="images/stuffs/thevoid.gif"/><br>
+ <img border="0" height="31" width="88" src="images/stuffs/they-them.gif"/>
+ <img border="0" height="31" width="88" src="images/stuffs/css-is-difficult.gif"/>
+ <img border="0" height="31" width="88" src="images/stuffs/bestvw.gif"/>
+ <a href="https://archive.org/"><img border="0" height="31" width="88" src="images/stuffs/preserve.gif"/></a>
+ <a href="http://wiby.org/"><img border="0" height="31" width="88" src="http://wiby.org/about/wiby.org.gif"/></a>
+ <a href="https://www.aimp.ru/"><img border="0" height="31" width="88"  src="https://www.aimp.ru/images/88x31.png"/></a>
+ </p>
+ 
+ <p align="center">&nbsp;</p>
 
-			<p align="center"><span style="font-size: 36px; background-color: #008080; color: #ffd700">&nbsp;Gallery of my Character&nbsp;</span></p>
-			<p align="center"><span style="color: #ee82ee; font-size: 26px">Despite how it might look<br>it's all the same character</span></p>
+ <p align="center"><span style="font-size: 36px; background-color: #008080; color: #ffd700">&nbsp;Gallery of my characters&nbsp;</span></p>
+ <p align="center"><span style="font-size: 36px; background-color: #000; color: #a300d9">&nbsp;Miraj&nbsp;</span></p>
+ <div align="center" style="color: #ee82ee; font-size: 26px">Despite how it might look, it's all the same character<br>They also have some basic-ish
+ <div class="dropdown">
+ <button class="dropbtn stroke" style="font-size: 21px">lore</button>
+  <div class="dropdown-content">
+  <img src="images/miraj_lore.png" style="display: block; border-style: inset; border-width: 2px;" class="revealAnim">
+  </div>
+ </div>
+ </div>
 		
-			<p align="center">
-			<img src="https://drive.google.com/thumbnail?id=1izcy3ukCTW01nzHJczlhR0-U5Fl9g2Y5&sz=h665" style="height: 665px;"/>&nbsp;&nbsp;&nbsp;
-			<img src="https://drive.google.com/thumbnail?id=1i6rSlosZE3Pl_9BotSsxilyHhbjFUe3D&sz=h665" style="height: 665px;" />&nbsp;&nbsp;&nbsp; 
-			<img src="https://drive.google.com/thumbnail?id=1j7UWO7IAKZKeDBAd5K6nd22xh2976xv-&sz=h665" style="height: 665px;" />&nbsp;&nbsp;&nbsp; 
-			<img src="https://drive.google.com/thumbnail?id=1ONcGb1kLAFm65qPoNrdm7T143zJMLtW9&sz=h665" style="height: 665px;" />&nbsp;&nbsp;&nbsp; 
-			<img src="https://drive.google.com/thumbnail?id=1DON6vQ2bFxF79Ph6f1Mzvjwhj2Xr1aMY&sz=h665" style="height: 665px;" />&nbsp;&nbsp;&nbsp; 
-			<img src="https://drive.google.com/thumbnail?id=1vP8DQ3h4pVw3lo1ZvbaMTz-j1smVpGx8&sz=h665" style="height: 665px;" />&nbsp;&nbsp;&nbsp; 
-			</p>
-			
-			<p align="center">&nbsp;</p>
-			<p align="center"><a href="index.htm"><img alt="backlightening.gif" height="61" src="images/backlightening.gif" width="120" /></a></p>
-			<p align="center">&nbsp;</p>
-			
-			<hr />
-			
-			<p align="center">&nbsp;</p>
-			<p align="center"><img alt="barraconstruction.gif (5595 bytes)" height="51" src="images/barraconstruction.gif" width="574"></p>
-			<p align="center">&nbsp;</p>
+ <div class="scroll-container" align="center">
+ <img src="https://drive.google.com/thumbnail?id=1izcy3ukCTW01nzHJczlhR0-U5Fl9g2Y5&sz=h666" style="height: 666px;" />
+ <img src="https://drive.google.com/thumbnail?id=1i6rSlosZE3Pl_9BotSsxilyHhbjFUe3D&sz=h666" style="height: 666px;" />
+ <img src="https://drive.google.com/thumbnail?id=1j7UWO7IAKZKeDBAd5K6nd22xh2976xv-&sz=h666" style="height: 666px;" />
+ <img src="https://drive.google.com/thumbnail?id=1ONcGb1kLAFm65qPoNrdm7T143zJMLtW9&sz=h666" style="height: 666px;" />
+ <img src="https://drive.google.com/thumbnail?id=1DON6vQ2bFxF79Ph6f1Mzvjwhj2Xr1aMY&sz=h666" style="height: 666px;" />
+ <img src="https://drive.google.com/thumbnail?id=1vP8DQ3h4pVw3lo1ZvbaMTz-j1smVpGx8&sz=h666" style="height: 666px;" />
+ </div>
+ 
+ <p align="center"><span style="font-size: 36px; background-color: #000; color: #a300d9">&nbsp;"fading fantom"&nbsp;</span></p>
+ <div align="center" style="color: #ee82ee; font-size: 26px">
+ Not even a proper refsheet, and no real lore yet also<br>
+ Expansion on the world building can be found in the <a style="color: #0f0" href="https://terminal.mirajspalace.space/">mainframe terminal</a><br>
+ <span style="font-size: 13px">(never watched evangelion btw)</span></div>
+ 
+ <div class="scroll-container" align="center">
+ <img src="https://drive.google.com/thumbnail?id=1XBSNvtSwq5HuLlt2qm2QAX_sTsRs5foH&sz=h666" style="height: 666px;" />
+ <img src="https://drive.google.com/thumbnail?id=1DtMImCPJEvMe7pu67qlU0J0r5NT4-H7i&sz=h666" style="height: 666px;" />
+ </div>
+ 
+ <p align="center">&nbsp;</p>
+ <p align="center"><a href="index.htm"><img alt="backlightening.gif" height="61" src="images/backlightening.gif" width="120" /></a></p>
+ <p align="center">&nbsp;</p>
+ 
+ <hr />
+ 
+ <p align="center">&nbsp;</p>
+ <p align="center"><img alt="barraconstruction.gif (5595 bytes)" height="51" src="images/barraconstruction.gif" width="574"></p>
+ <p align="center">&nbsp;</p>
 
 </body>
 </html>
