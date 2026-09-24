@@ -127,7 +127,6 @@
 			line-height: 16px;
 		}
 
-		/* ---- collapse toggle button ---- */
 		.collapse-toggle {
 			position: absolute;
 			top: 8px;
@@ -138,7 +137,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			font-size: 18px;
+			font-size: 16px;
 			line-height: 1;
 			background: transparent;
 			color: #ffffff;
@@ -154,7 +153,6 @@
 			color: #000000;
 		}
 
-		/* collapsed state: hide everything except the region name */
 		.region-row.collapsed .region-header {
 			margin-bottom: 0;
 		}
@@ -167,7 +165,6 @@
 		.region-row.collapsed .secondary-container {
 			display: none;
 		}
-		/* ensure the name stays visible and tidy */
 		.region-row.collapsed .region-header > div:first-child {
 			width: auto;
 		}
@@ -215,7 +212,10 @@
 	<div class="page" id="pageRoot">
 
 		<br>
-		<h2>NOCLIP DATA GENERATOR</h2>
+		<div style="display: flex; flex-direction: column; gap: 0.5em; ga align-items: center;">
+			<h2 style="margin: 0;">NOCLIP-DATA.SK GENERATOR</h2>
+			<p style="margin: 0;">for Liminality</p>
+		</div>
 		<br>
 
 		<div class="toolbar">
@@ -239,7 +239,7 @@
 <script>
 //state
 var regions = [];
-// track collapsed state per region (persisted)
+// track collapsed state
 var collapsedRegions = {};
 
 //init
@@ -258,7 +258,6 @@ window.onload = function() {
 	if (!regions || regions.length === 0) {
 		regions = [ makeEmptyRegion() ];
 	}
-	// ensure collapsedRegions has a key for each region (default false)
 	for (var i = 0; i < regions.length; i++) {
 		if (!collapsedRegions.hasOwnProperty(i)) {
 			collapsedRegions[i] = false;
@@ -377,7 +376,7 @@ function buildRegionRow(idx) {
 	delBtn.onclick = (function(i) {
 		return function() {
 			regions.splice(i, 1);
-			// rebuild collapsed map with shifted indices
+			// rebuild collapsed map
 			var newCollapsed = {};
 			for (var j = 0; j < regions.length; j++) {
 				newCollapsed[j] = collapsedRegions[j < i ? j : j + 1] || false;
