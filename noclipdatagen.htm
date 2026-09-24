@@ -127,6 +127,55 @@
 			line-height: 16px;
 		}
 
+		/* ---- collapse toggle button ---- */
+		.collapse-toggle {
+			position: absolute;
+			top: 8px;
+			right: 8px;
+			width: 28px;
+			height: 28px;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 18px;
+			line-height: 1;
+			background: transparent;
+			color: #ffffff;
+			border: 1px solid #ffffff;
+			cursor: pointer;
+			z-index: 5;
+			margin: 0;
+			font-family: Sharp;
+			transition: background 0.1s, color 0.1s;
+		}
+		.collapse-toggle:hover {
+			background: #ffffff;
+			color: #000000;
+		}
+
+		/* collapsed state: hide everything except the region name */
+		.region-row.collapsed .region-header {
+			margin-bottom: 0;
+		}
+		.region-row.collapsed .region-header > div:not(:first-child) {
+			display: none;
+		}
+		.region-row.collapsed .region-header > button:not(.collapse-toggle) {
+			display: none;
+		}
+		.region-row.collapsed .secondary-container {
+			display: none;
+		}
+		/* ensure the name stays visible and tidy */
+		.region-row.collapsed .region-header > div:first-child {
+			width: auto;
+		}
+		.region-row.collapsed .region-header > div:first-child input {
+			width: auto;
+			min-width: 120px;
+		}
+
 		.toolbar {
 			margin: 16px 0;
 			display: flex;
@@ -190,6 +239,8 @@
 <script>
 //state
 var regions = [];
+// track collapsed state per region (persisted)
+var collapsedRegions = {};
 
 //init
 window.onload = function() {
@@ -198,10 +249,20 @@ window.onload = function() {
 		if (saved) {
 			regions = JSON.parse(saved);
 		}
+		var savedCollapsed = localStorage.getItem('noclipCollapsedV1');
+		if (savedCollapsed) {
+			collapsedRegions = JSON.parse(savedCollapsed);
+		}
 	} catch(e) { /* ignore */ }
 
 	if (!regions || regions.length === 0) {
 		regions = [ makeEmptyRegion() ];
+	}
+	// ensure collapsedRegions has a key for each region (default false)
+	for (var i = 0; i < regions.length; i++) {
+		if (!collapsedRegions.hasOwnProperty(i)) {
+			collapsedRegions[i] = false;
+		}
 	}
 	renderAll();
 	snapPage();
@@ -244,9 +305,13 @@ function renderAll() {
 
 function buildRegionRow(idx) {
 	var r = regions[idx];
+	var isCollapsed = collapsedRegions[idx] === true;
 
 	var row = document.createElement('div');
 	row.className = 'region-row';
+	if (isCollapsed) {
+		row.classList.add('collapsed');
+	}
 	row.dataset.idx = idx;
 
 	// fancy header
@@ -312,6 +377,12 @@ function buildRegionRow(idx) {
 	delBtn.onclick = (function(i) {
 		return function() {
 			regions.splice(i, 1);
+			// rebuild collapsed map with shifted indices
+			var newCollapsed = {};
+			for (var j = 0; j < regions.length; j++) {
+				newCollapsed[j] = collapsedRegions[j < i ? j : j + 1] || false;
+			}
+			collapsedRegions = newCollapsed;
 			if (regions.length === 0) regions.push(makeEmptyRegion());
 			renderAll();
 			saveToStorage();
@@ -320,6 +391,32 @@ function buildRegionRow(idx) {
 	header.appendChild(delBtn);
 
 	row.appendChild(header);
+
+	// collapse button
+	var collapseBtn = document.createElement('button');
+	collapseBtn.className = 'collapse-toggle';
+	collapseBtn.textContent = isCollapsed ? '+' : '_';
+	collapseBtn.title = isCollapsed ? 'Expand region' : 'Collapse region';
+	collapseBtn.onclick = (function(i) {
+		return function(e) {
+			e.stopPropagation();
+			collapsedRegions[i] = !collapsedRegions[i];
+			// update button text and row class
+			var rowEl = collapseBtn.closest('.region-row');
+			if (collapsedRegions[i]) {
+				rowEl.classList.add('collapsed');
+				collapseBtn.textContent = '+';
+				collapseBtn.title = 'Expand region';
+			} else {
+				rowEl.classList.remove('collapsed');
+				collapseBtn.textContent = '_';
+				collapseBtn.title = 'Collapse region';
+			}
+			saveToStorage();
+		};
+	})(idx);
+	// append to row after header
+	row.appendChild(collapseBtn);
 
 	// secondary targets
 	var secContainer = document.createElement('div');
@@ -404,6 +501,8 @@ function buildSecondaryRow(regionIdx, secIdx) {
 // add region
 function addRegion() {
 	regions.push(makeEmptyRegion());
+	// set collapsed state for new region to false
+	collapsedRegions[regions.length - 1] = false;
 	renderAll();
 	saveToStorage();
 	window.scrollTo(0, document.body.scrollHeight);
@@ -413,6 +512,7 @@ function addRegion() {
 function saveToStorage() {
 	try {
 		localStorage.setItem('noclipRegionsV2', JSON.stringify(regions));
+		localStorage.setItem('noclipCollapsedV1', JSON.stringify(collapsedRegions));
 	} catch(e) { /* ignore */ }
 }
 
@@ -559,6 +659,11 @@ function loadFromSk() {
 	}
 
 	regions = newRegions;
+	// reset collapsed state for loaded regions
+	collapsedRegions = {};
+	for (var i = 0; i < regions.length; i++) {
+		collapsedRegions[i] = false;
+	}
 	renderAll();
 	saveToStorage();
 	setStatus('Loaded ' + regions.length + ' region(s).');
