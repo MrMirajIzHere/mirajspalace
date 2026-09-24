@@ -1,0 +1,594 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+	<title>Noclip Data Generator</title>
+	<link href="images/faviconCon.png" rel="icon" type="image/png">
+	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+	<meta content="Noclip Data" property="og:title">
+	<meta content="" property="og:description">
+	<meta content="" property="og:url">
+	<meta content="" property="og:image">
+	<meta content="#462b52" data-react-helmet="true" name="theme-color">
+	<link rel="stylesheet" href="common.css?=1">
+	<script src="common.js"></script>
+	<style>
+		@font-face {
+			font-family: Sharp;
+			src: url('Px437_Sharp_PC3K.ttf');
+			font-smooth: never;
+		}
+
+		body {
+			background: url('images/animspace.gif');
+			color: #ffffff;
+			font-family: Sharp;
+			font-size: 16px;
+			line-height: 16px;
+			margin: 0;
+			padding: 0;
+			image-rendering: pixelated;
+		}
+
+		.page {
+			width: 960px;
+			margin: 0 auto;
+			padding: 0 16px;
+			text-align: center;
+			box-sizing: content-box;
+		}
+
+		hr {
+			border: none;
+			border-top: 1px solid #ffffff;
+			margin: 16px 0;
+		}
+
+		h2 {
+			font-family: Sharp;
+			font-size: 32px;
+			line-height: 32px;
+			font-weight: normal;
+			margin: 16px 0;
+			color: #ffffff;
+		}
+
+		button {
+			font-family: Sharp;
+			font-size: 16px;
+			line-height: 16px;
+			background: transparent;
+			color: #ffffff;
+			border: 1px solid #ffffff;
+			padding: 4px 16px;
+			cursor: pointer;
+			margin: 0 4px;
+		}
+		button:hover {
+			background: #ffffff;
+			color: #000000;
+		}
+
+		input, textarea, select {
+			font-family: Sharp;
+			font-size: 16px;
+			line-height: 16px;
+			background: transparent;
+			color: #ffffff;
+			border: 1px solid #ffffff;
+			padding: 4px 8px;
+			box-sizing: border-box;
+		}
+		input:focus, textarea:focus {
+			outline: 1px solid #ffffff;
+		}
+
+		.field-label {
+			font-size: 16px;
+			line-height: 16px;
+			color: #ffffff;
+			display: block;
+			margin-bottom: 0;
+			text-align: left;
+		}
+
+		.region-row {
+			border: 1px solid #ffffff;
+			padding: 16px;
+			margin-bottom: 16px;
+			position: relative;
+			text-align: left;
+		}
+
+		.region-header {
+			display: flex;
+			gap: 16px;
+			margin-bottom: 8px;
+			align-items: flex-end;
+			flex-wrap: wrap;
+		}
+
+		.region-header > div {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.sec-row {
+			display: flex;
+			gap: 8px;
+			margin-left: 16px;
+			margin-bottom: 8px;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		.btn-sm {
+			padding: 1px 8px;
+			font-size: 16px;
+			line-height: 16px;
+		}
+
+		.toolbar {
+			margin: 16px 0;
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		#skOutput {
+			width: 100%;
+			box-sizing: border-box;
+			white-space: pre;
+			overflow: auto;
+		}
+
+		.status {
+			color: #ffffff;
+			margin-top: 8px;
+			display: block;
+			text-align: left;
+		}
+
+		.sec-label {
+			font-size: 16px;
+			line-height: 16px;
+			color: #ffffff;
+		}
+
+		input[type="number"] {
+			width: 96px;
+			padding-right: 12px;
+		}
+	</style>
+</head>
+<body background="images/animspace.gif" link="#FFFFFF" vlink="#FFFFFF">
+	<hr>
+	<div class="page" id="pageRoot">
+
+		<br>
+		<h2>NOCLIP DATA GENERATOR</h2>
+		<br>
+
+		<div class="toolbar">
+			<button onclick="addRegion()">+ New Region</button>
+			<button onclick="generateSk()">Generate .sk</button>
+			<button onclick="loadFromSk()">Load .sk</button>
+			<button onclick="copyOutput()">Copy</button>
+		</div>
+
+		<div id="regionsContainer"></div>
+
+		<hr>
+		<div id="outputArea">
+			<div class="field-label">noclip-data.sk:</div>
+			<textarea id="skOutput" rows="20"></textarea>
+			<span id="statusMsg" class="status"></span>
+		</div>
+		<hr>
+	</div>
+
+<script>
+//state
+var regions = [];
+
+//init
+window.onload = function() {
+	try {
+		var saved = localStorage.getItem('noclipRegionsV2');
+		if (saved) {
+			regions = JSON.parse(saved);
+		}
+	} catch(e) { /* ignore */ }
+
+	if (!regions || regions.length === 0) {
+		regions = [ makeEmptyRegion() ];
+	}
+	renderAll();
+	snapPage();
+	window.addEventListener('resize', snapPage);
+	window.addEventListener('scroll', snapPage);
+};
+
+//advanced rounding
+function snapPage() {
+	var page = document.getElementById('pageRoot');
+	if (!page) return;
+	var rect = page.getBoundingClientRect();
+	var left = Math.round(rect.left);
+	var current = page.style.marginLeft;
+	if (left !== 0 && Math.abs(left - parseFloat(current || 0)) >= 0.5) {
+		page.style.marginLeft = left + 'px';
+		page.style.marginRight = '0';
+	}
+}
+
+function makeEmptyRegion() {
+	return {
+		name: '',
+		rate: 100,
+		main: '',
+		secondary: [ { target: '', weight: 10 } ]
+	};
+}
+
+//render
+function renderAll() {
+	var container = document.getElementById('regionsContainer');
+	container.innerHTML = '';
+
+	for (var i = 0; i < regions.length; i++) {
+		container.appendChild(buildRegionRow(i));
+	}
+	snapPage();
+}
+
+function buildRegionRow(idx) {
+	var r = regions[idx];
+
+	var row = document.createElement('div');
+	row.className = 'region-row';
+	row.dataset.idx = idx;
+
+	// fancy header
+	var header = document.createElement('div');
+	header.className = 'region-header';
+
+	// region name
+	var nameWrap = document.createElement('div');
+	var nameLabel = document.createElement('span');
+	nameLabel.className = 'field-label';
+	nameLabel.textContent = 'region';
+	nameWrap.appendChild(nameLabel);
+	var nameInput = document.createElement('input');
+	nameInput.type = 'text';
+	nameInput.placeholder = 'region';
+	nameInput.value = r.name || '';
+	nameInput.size = 18;
+	nameInput.oninput = (function(i) {
+		return function(e) { regions[i].name = e.target.value; };
+	})(idx);
+	nameWrap.appendChild(nameInput);
+	header.appendChild(nameWrap);
+
+	// rate
+	var rateWrap = document.createElement('div');
+	var rateLabel = document.createElement('span');
+	rateLabel.className = 'field-label';
+	rateLabel.textContent = 'rate %';
+	rateWrap.appendChild(rateLabel);
+	var rateInput = document.createElement('input');
+	rateInput.type = 'number';
+	rateInput.min = 1;
+	rateInput.max = 100;
+	rateInput.value = r.rate;
+	rateInput.oninput = (function(i) {
+		return function(e) { regions[i].rate = parseInt(e.target.value, 10) || 100; };
+	})(idx);
+	rateWrap.appendChild(rateInput);
+	header.appendChild(rateWrap);
+
+	// main
+	var mainWrap = document.createElement('div');
+	var mainLabel = document.createElement('span');
+	mainLabel.className = 'field-label';
+	mainLabel.textContent = 'main (primary)';
+	mainWrap.appendChild(mainLabel);
+	var mainInput = document.createElement('input');
+	mainInput.type = 'text';
+	mainInput.placeholder = 'anchor';
+	mainInput.value = r.main || '';
+	mainInput.size = 20;
+	mainInput.oninput = (function(i) {
+		return function(e) { regions[i].main = e.target.value; };
+	})(idx);
+	mainWrap.appendChild(mainInput);
+	header.appendChild(mainWrap);
+
+	// delete region button
+	var delBtn = document.createElement('button');
+	delBtn.textContent = 'X';
+	delBtn.className = 'btn-sm';
+	delBtn.title = 'Delete region';
+	delBtn.onclick = (function(i) {
+		return function() {
+			regions.splice(i, 1);
+			if (regions.length === 0) regions.push(makeEmptyRegion());
+			renderAll();
+			saveToStorage();
+		};
+	})(idx);
+	header.appendChild(delBtn);
+
+	row.appendChild(header);
+
+	// secondary targets
+	var secContainer = document.createElement('div');
+	secContainer.className = 'secondary-container';
+
+	for (var s = 0; s < r.secondary.length; s++) {
+		secContainer.appendChild(buildSecondaryRow(idx, s));
+	}
+
+	// + add secondary button
+	var addBtn = document.createElement('button');
+	addBtn.textContent = '+ secondary';
+	addBtn.className = 'btn-sm';
+	addBtn.style.marginLeft = '16px';
+	addBtn.style.marginTop = '4px';
+	addBtn.onclick = (function(i) {
+		return function() {
+			regions[i].secondary.push({ target: '', weight: 10 });
+			renderAll();
+			saveToStorage();
+		};
+	})(idx);
+	secContainer.appendChild(addBtn);
+
+	row.appendChild(secContainer);
+
+	return row;
+}
+
+function buildSecondaryRow(regionIdx, secIdx) {
+	var sec = regions[regionIdx].secondary[secIdx];
+
+	var row = document.createElement('div');
+	row.className = 'sec-row';
+
+	// target
+	var targetInput = document.createElement('input');
+	targetInput.type = 'text';
+	targetInput.placeholder = 'anchor (or DAMAGE)';
+	targetInput.value = sec.target || '';
+	targetInput.size = 20;
+	targetInput.oninput = (function(ri, si) {
+		return function(e) { regions[ri].secondary[si].target = e.target.value; };
+	})(regionIdx, secIdx);
+	row.appendChild(targetInput);
+
+	// weight
+	var weightLabel = document.createElement('span');
+	weightLabel.textContent = 'weight';
+	weightLabel.className = 'sec-label';
+	row.appendChild(weightLabel);
+
+	var weightInput = document.createElement('input');
+	weightInput.type = 'number';
+	weightInput.min = 1;
+	weightInput.value = sec.weight;
+	weightInput.oninput = (function(ri, si) {
+		return function(e) { regions[ri].secondary[si].weight = parseInt(e.target.value, 10) || 1; };
+	})(regionIdx, secIdx);
+	row.appendChild(weightInput);
+
+	// remove secondary button
+	var delBtn = document.createElement('button');
+	delBtn.textContent = '-';
+	delBtn.className = 'btn-sm';
+	delBtn.title = 'Remove secondary';
+	delBtn.onclick = (function(ri, si) {
+		return function() {
+			regions[ri].secondary.splice(si, 1);
+			if (regions[ri].secondary.length === 0) {
+				regions[ri].secondary.push({ target: '', weight: 10 });
+			}
+			renderAll();
+			saveToStorage();
+		};
+	})(regionIdx, secIdx);
+	row.appendChild(delBtn);
+
+	return row;
+}
+
+// add region
+function addRegion() {
+	regions.push(makeEmptyRegion());
+	renderAll();
+	saveToStorage();
+	window.scrollTo(0, document.body.scrollHeight);
+}
+
+// save
+function saveToStorage() {
+	try {
+		localStorage.setItem('noclipRegionsV2', JSON.stringify(regions));
+	} catch(e) { /* ignore */ }
+}
+
+// generate sk
+function generateSk() {
+	for (var i = 0; i < regions.length; i++) {
+		if (!regions[i].name || regions[i].name.trim() === '') {
+			setStatus('Region #' + (i + 1) + ' has no name.');
+			return;
+		}
+	}
+
+	var body = [];
+
+	for (var i = 0; i < regions.length; i++) {
+		var r = regions[i];
+		var rn = r.name.trim();
+
+		body.push('# region: ' + rn);
+		body.push('set {noclip.regions::' + rn + '::success-rate} to ' + r.rate);
+
+		if (r.main && r.main.trim() !== '') {
+			body.push('set {noclip.regions::' + rn + '::main} to "' + r.main.trim() + '"');
+		} else {
+			body.push('# set {noclip.regions::' + rn + '::main} to ""  # no main destination');
+		}
+
+		var secCount = 0;
+		for (var s = 0; s < r.secondary.length; s++) {
+			var sec = r.secondary[s];
+			if (!sec.target || sec.target.trim() === '') continue;
+			secCount++;
+			var idx = secCount;
+			body.push('set {noclip.regions::' + rn + '::secondary::' + idx + '::target} to "' + sec.target.trim() + '"');
+			body.push('set {noclip.regions::' + rn + '::secondary::' + idx + '::weight} to ' + sec.weight);
+		}
+		if (secCount === 0) {
+			body.push('# no secondary targets defined');
+		}
+		body.push('');
+	}
+
+	// wrap into a function
+	var out = [];
+	out.push('# noclip-data.sk');
+	out.push('# https://mirajspalace.space/noclipdatagen.htm');
+	out.push('# ' + new Date().toISOString());
+	out.push('');
+	out.push('function loadNoclipData():');
+	for (var i = 0; i < body.length; i++) {
+		if (body[i] === '') {
+			out.push('');
+		} else {
+			out.push('\t' + body[i]);
+		}
+	}
+
+	document.getElementById('skOutput').value = out.join('\n');
+	setStatus('Generated ' + regions.length + ' region(s).');
+}
+
+// load sk
+function loadFromSk() {
+	var text = document.getElementById('skOutput').value.trim();
+	if (text === '') {
+		setStatus('Output is empty. Generate or paste .sk content first.');
+		return;
+	}
+
+	var parsed = {};
+	var lines = text.split('\n');
+	var currentRegion = null;
+
+	for (var i = 0; i < lines.length; i++) {
+		// strip leading tabs/spaces
+		var line = lines[i].replace(/^[\t ]+/, '').replace(/[\t ]+$/, '');
+		if (line === '') continue;
+
+		// skip the function wrapper
+		if (/^function\s+loadNoclipData\s*\(\s*\)\s*:/.test(line)) continue;
+
+		if (line.startsWith('#')) {
+			// accept both "# region: X" and "# --- region: X ---"
+			var regionMatch = line.match(/^#\s*-*\s*region:\s*(.+?)\s*-*$/);
+			if (regionMatch) {
+				currentRegion = regionMatch[1].trim();
+				parsed[currentRegion] = { rate: 100, main: '', secondary: [] };
+			}
+			continue;
+		}
+
+		if (!currentRegion || !parsed[currentRegion]) continue;
+		var r = parsed[currentRegion];
+
+		var rateMatch = line.match(/^set\s+\{noclip\.regions::(.+?)::success-rate\}\s+to\s+(\d+)/);
+		if (rateMatch && rateMatch[1].trim() === currentRegion) {
+			r.rate = parseInt(rateMatch[2], 10);
+			continue;
+		}
+
+		var mainMatch = line.match(/^set\s+\{noclip\.regions::(.+?)::main\}\s+to\s+"(.*)"/);
+		if (mainMatch && mainMatch[1].trim() === currentRegion) {
+			r.main = mainMatch[2];
+			continue;
+		}
+
+		var secTargetMatch = line.match(/^set\s+\{noclip\.regions::(.+?)::secondary::(\d+)::target\}\s+to\s+"(.*)"/);
+		if (secTargetMatch && secTargetMatch[1].trim() === currentRegion) {
+			var idx = parseInt(secTargetMatch[2], 10) - 1;
+			while (r.secondary.length <= idx) r.secondary.push({ target: '', weight: 10 });
+			r.secondary[idx].target = secTargetMatch[3];
+			continue;
+		}
+
+		var secWeightMatch = line.match(/^set\s+\{noclip\.regions::(.+?)::secondary::(\d+)::weight\}\s+to\s+(\d+)/);
+		if (secWeightMatch && secWeightMatch[1].trim() === currentRegion) {
+			var idx2 = parseInt(secWeightMatch[2], 10) - 1;
+			while (r.secondary.length <= idx2) r.secondary.push({ target: '', weight: 10 });
+			r.secondary[idx2].weight = parseInt(secWeightMatch[3], 10);
+			continue;
+		}
+	}
+
+	var newRegions = [];
+	for (var rn in parsed) {
+		if (!parsed.hasOwnProperty(rn)) continue;
+		var p = parsed[rn];
+		var clean = [];
+		for (var s = 0; s < p.secondary.length; s++) {
+			if (p.secondary[s].target !== '') clean.push(p.secondary[s]);
+		}
+		if (clean.length === 0) clean.push({ target: '', weight: 10 });
+		newRegions.push({
+			name: rn,
+			rate: p.rate,
+			main: p.main,
+			secondary: clean
+		});
+	}
+
+	if (newRegions.length === 0) {
+		setStatus('No valid region data found.');
+		return;
+	}
+
+	regions = newRegions;
+	renderAll();
+	saveToStorage();
+	setStatus('Loaded ' + regions.length + ' region(s).');
+}
+
+// copy
+function copyOutput() {
+	var ta = document.getElementById('skOutput');
+	if (!ta.value.trim()) {
+		setStatus('Nothing to copy.');
+		return;
+	}
+	ta.select();
+	ta.setSelectionRange(0, 99999);
+	try {
+		document.execCommand('copy');
+		setStatus('Copied to clipboard.');
+	} catch(e) {
+		setStatus('Copy failed. Select manually.');
+	}
+	ta.blur();
+}
+
+// status
+function setStatus(msg) {
+	var el = document.getElementById('statusMsg');
+	el.textContent = msg;
+	if (window._statusTimer) clearTimeout(window._statusTimer);
+	window._statusTimer = setTimeout(function() { el.textContent = ''; }, 4000);
+}
+</script>
+</body>
+</html>

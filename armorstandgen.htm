@@ -25,8 +25,8 @@
 	<hr style="color:ffffff">
 	<span style="text-align: center; line-height:2; display: block; margin: auto; font-family: Sharp; image-rendering: pixelated; color: #ffffff; ">
 	<br>
-    <label for="tag">Tag:</label><br>
-    <input type="text" id="tag" size="63" placeholder="tag"><br><br>
+    <label for="tag">Tags (one per line):</label><br>
+    <textarea id="tag" rows="4" cols="63" placeholder="tag1&#10;tag2&#10;tag3"></textarea><br><br>
 	<label for="customName">CustomName:</label><br>
 	<input type="text" id="customName" size="63" placeholder="Armor Stand"><br><br>
 	<label for="nameVisible">CustomNameVisible:</label><br>
@@ -46,27 +46,39 @@
 	</span>
 <script>
 function submit() {
-	let tag = document.getElementById('tag').value;
+	let tagInput = document.getElementById('tag').value;
 	let customName = document.getElementById('customName').value;
 	let nameVisible = document.getElementById('nameVisible').checked;
 	let marker = document.getElementById('marker').checked;
 	
-	if (!tag || tag.trim() === '') {
-		tag = document.getElementById('tag').placeholder;
+	// Parse multiple tags: split by newline, trim, filter out empty lines
+	let tags = tagInput.split('\n')
+		.map(function(t) { return t.trim(); })
+		.filter(function(t) { return t !== ''; });
+	
+	// If no valid tags, use placeholder as fallback
+	if (tags.length === 0) {
+		tags = [document.getElementById('tag').placeholder.split('\n')[0] || 'tag'];
 	}
 	
+	// CustomName fallback: use first tag if empty
 	if (!customName || customName.trim() === '') {
-		customName = tag;
+		customName = tags[0];
 	}
 
-	console.log("Tag: " + tag);
+	console.log("Tags: " + tags.join(", "));
 	console.log("CustomName: " + customName);
 	console.log("Name Visible: " + nameVisible);
 	console.log("Marker: " + marker);
 
 	let entityTag = '{id:"minecraft:armor_stand"';
 	entityTag += ',CustomName:\'"' + customName + '"\'';
-	entityTag += ',Tags:["' + tag + '"]';
+
+	// Build Tags array with multiple entries
+	let tagList = tags.map(function(t) {
+		return '"' + t.replace(/"/g, '\\"') + '"';
+	}).join(',');
+	entityTag += ',Tags:[' + tagList + ']';
 	
 	if (nameVisible) {
 		entityTag += ',CustomNameVisible:1b';
@@ -114,7 +126,13 @@ function fallbackCopy(text) {
 }
 
 document.addEventListener('keydown', function(e) {
-	if (e.key === 'Enter') {
+	if (e.key === 'Enter' && !e.shiftKey) {
+		// Allow Shift+Enter to insert a newline in textarea
+		if (document.activeElement && document.activeElement.id === 'tag') {
+			// Only submit if not in tag textarea to preserve multi-line input
+			return;
+		}
+		e.preventDefault();
 		submit();
 	}
 });
