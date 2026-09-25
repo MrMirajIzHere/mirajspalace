@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
-<html><head>
+<html>
+<head>
 	<title>Armor Stand Generator</title>
 	<link href="images/faviconCon.png" rel="icon" type="image/png">
 	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
@@ -8,134 +9,167 @@
 	<meta content="http://mirajspalace.space" property="og:url">
 	<meta content="http://mirajspalace.space/images/mirajspalaceEMBED.png" property="og:image">
 	<meta content="#462b52" data-react-helmet="true" name="theme-color">
-	
 	<link rel="stylesheet" href="common.css?=1">
-<script src="common.js"></script>
+	<link rel="stylesheet" href="tool_common.css?=2">
+	<script>window.isDisabled = true;</script>
+	<script src="common.js"></script>
+	<script src="tool_common.js"></script>
 
 	<style>
-	@font-face {
-	font-family: Sharp;
-	src: url('Px437_Sharp_PC3K.ttf'); 
-	font-smooth: never;
-} 
-</style>
+		.out-row {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			justify-content: center;
+			flex-wrap: wrap;
+			word-break: break-all;
+		}
+		.out-row > span {
+			text-align: left;
+		}
+		.out-row > button {
+			margin: 0;
+			flex-shrink: 0;
+		}
+
+		.check-row {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			justify-content: center;
+			margin-bottom: 8px;
+		}
+		.check-row label {
+			font-size: 16px;
+			color: #ffffff;
+		}
+		.check-row input[type="checkbox"] {
+			width: 16px;
+			height: 16px;
+			margin: 0;
+		}
+	</style>
 </head>
 
-<body background="images/animspace.gif" link="#FF0000" vlink="#7F7F7F">
-	<hr style="color:ffffff">
-	<span style="text-align: center; line-height:2; display: block; margin: auto; font-family: Sharp; image-rendering: pixelated; color: #ffffff; ">
-	<br>
-    <label for="tag">Tags (one per line):</label><br>
-    <textarea id="tag" rows="4" cols="63" placeholder="tag1&#10;tag2&#10;tag3"></textarea><br><br>
-	<label for="customName">CustomName:</label><br>
-	<input type="text" id="customName" size="63" placeholder="Armor Stand"><br><br>
-	<label for="nameVisible">CustomNameVisible:</label><br>
-	<input type="checkbox" id="nameVisible"><br><br>
-	<label for="marker">Marker:</label><br>
-	<input type="checkbox" id="marker" checked><br><br>
-    <input type="submit" value="submit" onclick="submit()">
-	<br><br>
-	<hr style="color:ffffff">
-	<div id="output">
-		<span>command:</span><br>
-		<span id="cmdOut"></span><br>
-		<button id="copyBtn" onclick="copyCommand()">Copy</button>
-		<hr style="color:ffffff">
+<body background="images/animspace.gif" link="#FFFFFF" vlink="#FFFFFF">
+	<hr>
+	<div class="page" id="pageRoot">
+
+		<br>
+		<div style="display: flex; flex-direction: column; gap: 0.5em; align-items: center;">
+			<h2 style="margin: 0;">ARMOR STAND GENERATOR</h2>
+			<p style="margin: 0;">for Liminality</p>
+		</div>
+		<br>
+
+		<div class="field-label">Tags (one per line):</div>
+		<textarea id="tag" rows="4" cols="58" placeholder="tag1&#10;tag2&#10;tag3"></textarea>
+		<br><br>
+
+		<div class="field-label">CustomName:</div>
+		<input type="text" id="customName" size="59" placeholder="Armor Stand">
+		<br><br>
+
+		<div class="check-row">
+			<input type="checkbox" id="nameVisible">
+			<label for="nameVisible">CustomNameVisible</label>
+		</div>
+
+		<div class="check-row">
+			<input type="checkbox" id="marker" checked>
+			<label for="marker">Marker</label>
+		</div>
+
+		<br>
+		<button onclick="generate()">submit</button>
+
+		<br><br>
+		<hr>
+
+		<div id="output">
+			<div class="field-label">command:</div>
+			<div class="out-row">
+				<span id="cmdOut"></span>
+				<button class="btn-sm" onclick="copyById('cmdOut', this)">copy</button>
+			</div>
+			<hr>
+		</div>
+
 	</div>
-	
-	</span>
+	<hr>
+
 <script>
-function submit() {
-	let tagInput = document.getElementById('tag').value;
-	let customName = document.getElementById('customName').value;
-	let nameVisible = document.getElementById('nameVisible').checked;
-	let marker = document.getElementById('marker').checked;
+//init
+window.onload = function() {
+	snapPage();
+	window.addEventListener('resize', snapPage);
+	window.addEventListener('scroll', snapPage);
+};
+
+//advanced rounding
+function snapPage() {
+	var page = document.getElementById('pageRoot');
+	if (!page) return;
 	
-	// Parse multiple tags: split by newline, trim, filter out empty lines
-	let tags = tagInput.split('\n')
+	page.style.transform = '';
+	var rect = page.getBoundingClientRect();
+	var left = rect.left;
+	var snapped = Math.round(left);
+	var delta = snapped - left;
+
+	if (Math.abs(delta) >= 0.5) {
+		page.style.transform = 'translateX(' + delta + 'px)';
+	}
+}
+
+function generate() {
+	var tagInput = document.getElementById('tag').value;
+	var customName = document.getElementById('customName').value;
+	var nameVisible = document.getElementById('nameVisible').checked;
+	var marker = document.getElementById('marker').checked;
+
+	var tags = tagInput.split('\n')
 		.map(function(t) { return t.trim(); })
 		.filter(function(t) { return t !== ''; });
-	
-	// If no valid tags, use placeholder as fallback
+
 	if (tags.length === 0) {
 		tags = [document.getElementById('tag').placeholder.split('\n')[0] || 'tag'];
 	}
-	
-	// CustomName fallback: use first tag if empty
+
 	if (!customName || customName.trim() === '') {
 		customName = tags[0];
 	}
 
-	console.log("Tags: " + tags.join(", "));
-	console.log("CustomName: " + customName);
-	console.log("Name Visible: " + nameVisible);
-	console.log("Marker: " + marker);
-
-	let entityTag = '{id:"minecraft:armor_stand"';
+	var entityTag = '{id:"minecraft:armor_stand"';
 	entityTag += ',CustomName:\'"' + customName + '"\'';
 
-	// Build Tags array with multiple entries
-	let tagList = tags.map(function(t) {
+	var tagList = tags.map(function(t) {
 		return '"' + t.replace(/"/g, '\\"') + '"';
 	}).join(',');
 	entityTag += ',Tags:[' + tagList + ']';
-	
+
 	if (nameVisible) {
 		entityTag += ',CustomNameVisible:1b';
 	}
-	
 	if (marker) {
 		entityTag += ',Marker:1b';
 	}
-	
 	entityTag += '}';
 
-	let giveCmd = '/give @p minecraft:llama_spawn_egg{display:{Name:\'{"text":"Armor Stand Spawn Egg"}\'},EntityTag:' + entityTag + '} 1';
-	
+	var giveCmd = '/give @p minecraft:llama_spawn_egg{display:{Name:\'{"text":"Armor Stand Spawn Egg"}\'},EntityTag:' + entityTag + '} 1';
+
 	document.getElementById('cmdOut').innerHTML = giveCmd;
-	
-	document.getElementById('copyBtn').style.display = 'inline';
-}
-
-function copyCommand() {
-	let cmdText = document.getElementById('cmdOut').innerText;
-	
-	if (navigator.clipboard && navigator.clipboard.writeText) {
-		navigator.clipboard.writeText(cmdText).then(function() {
-			showCopyMsg('Copied!');
-		}).catch(function() {
-			fallbackCopy(cmdText);
-		});
-	} else {
-		fallbackCopy(cmdText);
-	}
-}
-
-function fallbackCopy(text) {
-	let textarea = document.createElement('textarea');
-	textarea.value = text;
-	textarea.style.position = 'fixed';
-	textarea.style.opacity = '0';
-	document.body.appendChild(textarea);
-	textarea.select();
-	try {
-		document.execCommand('copy');
-	} catch (e) {
-	}
-	document.body.removeChild(textarea);
 }
 
 document.addEventListener('keydown', function(e) {
 	if (e.key === 'Enter' && !e.shiftKey) {
-		// Allow Shift+Enter to insert a newline in textarea
 		if (document.activeElement && document.activeElement.id === 'tag') {
-			// Only submit if not in tag textarea to preserve multi-line input
 			return;
 		}
 		e.preventDefault();
-		submit();
+		generate();
 	}
 });
 </script>
-
-</body></html>
+</body>
+</html>

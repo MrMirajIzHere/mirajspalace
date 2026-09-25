@@ -5,11 +5,11 @@
     
     var isSmallScreen = window.innerWidth <= 768;
 	
-	console.log(isMobile, isZoomed, isSmallScreen);
+	console.log("isMobile " + isMobile,",isZoomed "+ isZoomed,",isSmallScreen " + isSmallScreen,",window.isDisabled " + window.isDisabled);
     
-    if (isMobile || isZoomed || isSmallScreen) {
+    if ((isMobile || isZoomed || isSmallScreen) && !window.isDisabled) {
         document.write(`
-<div style="position: fixed; color: white; font-family: DOS-V; font-size:24; z-index: 30;" class="stroke2 reswarn">
+<div style="position: fixed; color: white; font-family: DOS-V; font-size:24; line-height: 1.2; z-index: 30; column;" class="stroke2 reswarn">
 recommended horizontal resolution is <span style="color:red">1920px </span>at <span style="color:red">100% zoom</span><br>
 recommended browser <span style="color:red">Firefox </span>on a <span style="color:red">computer</span><br>
 click <a style="color:blue" onclick="this.parentElement.style.display = 'none';" href="#">[Here]</a> to hide this warning<br>

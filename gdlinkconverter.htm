@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
-<html><head>
+<html>
+<head>
 	<title>Link converter</title>
 	<link href="images/faviconCon.png" rel="icon" type="image/png">
 	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
@@ -8,68 +9,102 @@
 	<meta content="http://mirajspalace.space" property="og:url">
 	<meta content="http://mirajspalace.space/images/mirajspalaceEMBED.png" property="og:image">
 	<meta content="#462b52" data-react-helmet="true" name="theme-color">
-	
 	<link rel="stylesheet" href="common.css?=1">
-<script src="common.js"></script>
-
-	<style>
-	@font-face {
-	font-family: Sharp;
-	src: url('Px437_Sharp_PC3K.ttf'); 
-	font-smooth: never;
-} 
-</style>
+	<link rel="stylesheet" href="tool_common.css?=1">
+	<script>window.isDisabled = true;</script>
+	<script src="common.js"></script>
+	<script src="tool_common.js"></script>
 </head>
+<style>
+	.out-row {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		justify-content: center;
+		flex-wrap: wrap;
+		word-break: break-all;
+	}
+	.out-row > span {
+		text-align: left;
+	}
+	.out-row > button {
+		margin: 0;
+		flex-shrink: 0;
+	}
+</style>
+<body background="images/animspace.gif" link="#FFFFFF" vlink="#FFFFFF">
+	<hr>
+	<div class="page" id="pageRoot">
 
-<body background="images/animspace.gif" link="#FF0000" vlink="#7F7F7F">
-	<hr style="color:ffffff">
-	<span style="text-align: center; line-height:2; display: block; margin: auto; font-family: Sharp; image-rendering: pixelated; color: #ffffff; ">
-	<br>
-    <label for="input">LINK TO GOOGLE DRIVE IMAGE:</label><br>
-    <input type="text" id="link" size="63" placeholder="https://drive.google.com/file/d/11tsEHD_4OdDei0YFgZUmeansZFPmT58X/view"><br><br>
-	<label for="input">SIZE (pixels):</label><br>
-	<input type="text" id="size" placeholder="1000"><br><br>
-    <input type="submit" value="submit" onclick="submit()">
-	<br><br>
-	OUTPUT:
-	<hr style="color:ffffff">
-	<div id="output">
-		<span style="text-decoration-line: underline">thumbnail height:</span><br>
-		<span id="verticalOut"></span><br>
-		<hr style="color:ffffff">
-		<span style="text-decoration-line: underline">thumbnail width:</span><br>
-		<span id="horizontalOut"></span><br>
-		<hr style="color:ffffff">
-		<span style="text-decoration-line: underline">lh3:</span><br>
-		<span id="lh3Out"></span><br>
-		<hr style="color:ffffff">
+		<br>
+		<div style="display: flex; flex-direction: column; gap: 0.5em; align-items: center;">
+			<h2 style="margin: 0;">LINK CONVERTER</h2>
+			<p style="margin: 0;">Google Drive &rarr; image</p>
+		</div>
+		<br><br>
+
+		<div class="field-label">LINK TO GOOGLE DRIVE IMAGE:</div>
+		<input type="text" id="link" size="63"
+			placeholder="https://drive.google.com/file/d/11tsEHD_4OdDei0YFgZUmeansZFPmT58X/view">
+		<br><br>
+
+		<div class="field-label">SIZE (pixels):</div>
+		<input type="text" id="size" placeholder="1000">
+		<br><br>
+
+		<button onclick="convert()">submit</button>
+
+		<br><br>
+		OUTPUT:
+		<hr>
+
+		<div id="output">
+		<div class="field-label">thumbnail height:</div>
+		<div class="out-row">
+			<span id="verticalOut"></span>
+			<button class="btn-sm" onclick="copyById('verticalOut', this)">copy</button>
+		</div>
+	<hr>
+
+	<div class="field-label">thumbnail width:</div>
+	<div class="out-row">
+		<span id="horizontalOut"></span>
+		<button class="btn-sm" onclick="copyById('horizontalOut', this)">copy</button>
 	</div>
+	<hr>
 	
-	</span>
+	<div class="field-label">lh3:</div>
+	<div class="out-row">
+		<span id="lh3Out"></span>
+		<button class="btn-sm" onclick="copyById('lh3Out', this)">copy</button>
+	</div>
+	<hr>
+	</div>
+
+	</div>
+	<hr>
+
 <script>
-function submit() {
-	let glink = document.getElementById('link').value;
-	let size = document.getElementById('size').value;
-	
-	// Use placeholder values if fields are empty
+function convert() {
+	var glink = document.getElementById('link').value;
+	var size = document.getElementById('size').value;
+
 	if (!glink || glink.trim() === '') {
 		glink = document.getElementById('link').placeholder;
 	}
-	
 	if (!size || size.trim() === '') {
 		size = document.getElementById('size').placeholder;
 	}
 
-	console.log("Full link: " + glink);
-	console.log("Size: " + size);
-
-	let fileId = extractFileId(glink);
-	console.log("File ID: " + fileId);
+	var fileId = extractFileId(glink);
 
 	if (fileId) {
-		document.getElementById('verticalOut').innerHTML = "https://drive.google.com/thumbnail?id=" + fileId + "&sz=h" + size;
-		document.getElementById('horizontalOut').innerHTML = "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w" + size;
-		document.getElementById('lh3Out').innerHTML = "https://lh3.googleusercontent.com/d/" + fileId + "=s0";
+		document.getElementById('verticalOut').innerHTML =
+			"https://drive.google.com/thumbnail?id=" + fileId + "&sz=h" + size;
+		document.getElementById('horizontalOut').innerHTML =
+			"https://drive.google.com/thumbnail?id=" + fileId + "&sz=w" + size;
+		document.getElementById('lh3Out').innerHTML =
+			"https://lh3.googleusercontent.com/d/" + fileId + "=s0";
 	} else {
 		document.getElementById('verticalOut').innerHTML = "Invalid Google Drive link";
 		document.getElementById('horizontalOut').innerHTML = "Invalid Google Drive link";
@@ -78,20 +113,85 @@ function submit() {
 }
 
 function extractFileId(url) {
-	let match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+	var match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
 	if (match) return match[1];
-	
+
 	match = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
 	if (match) return match[1];
-	
+
 	match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
 	if (match) return match[1];
-	
+
 	match = url.match(/\/d\/([a-zA-Z0-9_-]+)=/);
 	if (match) return match[1];
-	
+
 	return null;
 }
-</script>
 
-</body></html>
+function copyText(text, btn) {
+	if (!text || text.trim() === '') return;
+
+	function flash(label) {
+		if (!btn) return;
+		var old = btn.textContent;
+		btn.textContent = label;
+		btn.disabled = true;
+		setTimeout(function() {
+			btn.textContent = old;
+			btn.disabled = false;
+		}, 1000);
+	}
+
+	if (navigator.clipboard && navigator.clipboard.writeText) {
+		navigator.clipboard.writeText(text).then(
+			function() { flash('copied!'); },
+			function() { flash('failed'); }
+		);
+	} else {
+		var ta = document.createElement('textarea');
+		ta.value = text;
+		ta.style.position = 'fixed';
+		ta.style.opacity = '0';
+		document.body.appendChild(ta);
+		ta.select();
+		try {
+			document.execCommand('copy');
+			flash('copied!');
+		} catch (e) {
+			flash('failed');
+		}
+		document.body.removeChild(ta);
+	}
+}
+
+function copyById(id, btn) {
+	var el = document.getElementById(id);
+	if (!el) return;
+	copyText(el.textContent || el.innerText || '', btn);
+}
+
+//init
+window.onload = function() {
+	snapPage();
+	window.addEventListener('resize', snapPage);
+	window.addEventListener('scroll', snapPage);
+};
+
+//advanced rounding
+function snapPage() {
+	var page = document.getElementById('pageRoot');
+	if (!page) return;
+	
+	page.style.transform = '';
+	var rect = page.getBoundingClientRect();
+	var left = rect.left;
+	var snapped = Math.round(left);
+	var delta = snapped - left;
+
+	if (Math.abs(delta) >= 0.5) {
+		page.style.transform = 'translateX(' + delta + 'px)';
+	}
+}
+</script>
+</body>
+</html>
