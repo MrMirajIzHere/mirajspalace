@@ -45,13 +45,20 @@
 	flex-wrap: wrap;
 }
 
-.collapse-toggle {
+.region-controls {
 	position: absolute;
 	top: 8px;
 	right: 8px;
+	display: flex;
+	gap: 4px;
+	z-index: 5;
+}
+
+.region-controls button {
 	width: 28px;
 	height: 28px;
 	padding: 0;
+	margin: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -61,23 +68,22 @@
 	color: #ffffff;
 	border: 1px solid #ffffff;
 	cursor: pointer;
-	z-index: 5;
-	margin: 0;
 	font-family: Sharp;
 	transition: background 0.1s, color 0.1s;
+	box-sizing: border-box;
 }
-.collapse-toggle:hover {
+
+.region-controls button:hover {
 	background: #ffffff;
 	color: #000000;
+	position: relative;
+	z-index: 1;
 }
 
 .region-row.collapsed .region-header {
 	margin-bottom: 0;
 }
 .region-row.collapsed .region-header > div:not(:first-child) {
-	display: none;
-}
-.region-row.collapsed .region-header > button:not(.collapse-toggle) {
 	display: none;
 }
 .region-row.collapsed .secondary-container {
@@ -89,6 +95,13 @@
 .region-row.collapsed .region-header > div:first-child input {
 	width: auto;
 	min-width: 120px;
+}
+
+.output-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	margin-bottom: 4px;
 }
 </style>
 <body background="images/animspace.gif" link="#FFFFFF" vlink="#FFFFFF">
@@ -106,14 +119,16 @@
 			<button onclick="addRegion()">+ New Region</button>
 			<button onclick="generateSk()">Generate .sk</button>
 			<button onclick="loadFromSk()">Load .sk</button>
-			<button onclick="copyOutput()">Copy</button>
 		</div>
 
 		<div id="regionsContainer"></div>
 
 		<hr>
 		<div id="outputArea">
-			<div class="field-label">noclip-data.sk:</div>
+			<div class="output-header">
+				<div class="field-label">noclip-data.sk:</div>
+				<button onclick="copyOutput()">Copy</button>
+			</div>
 			<textarea id="skOutput" rows="20"></textarea>
 			<span id="statusMsg" class="status"></span>
 		</div>
@@ -244,13 +259,78 @@ function buildRegionRow(idx) {
 	mainWrap.appendChild(mainInput);
 	header.appendChild(mainWrap);
 
-	// delete region button
+	row.appendChild(header);
+
+	var controls = document.createElement('div');
+	controls.className = 'region-controls';
+
+	// collapse
+	var collapseBtn = document.createElement('button');
+	collapseBtn.textContent = isCollapsed ? '=' : '_';
+	collapseBtn.title = isCollapsed ? 'Expand region' : 'Collapse region';
+	collapseBtn.onclick = (function(i) {
+		return function(e) {
+			e.stopPropagation();
+			collapsedRegions[i] = !collapsedRegions[i];
+			// update button text and row class
+			var rowEl = collapseBtn.closest('.region-row');
+			if (collapsedRegions[i]) {
+				rowEl.classList.add('collapsed');
+				collapseBtn.textContent = '=';
+				collapseBtn.title = 'Expand region';
+			} else {
+				rowEl.classList.remove('collapsed');
+				collapseBtn.textContent = '_';
+				collapseBtn.title = 'Collapse region';
+			}
+		};
+	})(idx);
+	controls.appendChild(collapseBtn);
+
+	// duplicate
+	var dupBtn = document.createElement('button');
+	dupBtn.textContent = '+';
+	dupBtn.title = 'Duplicate region';
+	dupBtn.onclick = (function(i) {
+		return function(e) {
+			e.stopPropagation();
+			var original = regions[i];
+			var copy = {
+				name: original.name,
+				rate: original.rate,
+				main: original.main,
+				secondary: []
+			};
+			for (var s = 0; s < original.secondary.length; s++) {
+				copy.secondary.push({
+					target: original.secondary[s].target,
+					weight: original.secondary[s].weight
+				});
+			}
+			regions.splice(i + 1, 0, copy);
+			var newCollapsed = {};
+			for (var j = 0; j < regions.length; j++) {
+				if (j <= i) {
+					newCollapsed[j] = collapsedRegions[j] || false;
+				} else if (j === i + 1) {
+					newCollapsed[j] = false;
+				} else {
+					newCollapsed[j] = collapsedRegions[j - 1] || false;
+				}
+			}
+			collapsedRegions = newCollapsed;
+			renderAll();
+		};
+	})(idx);
+	controls.appendChild(dupBtn);
+
+	// delete
 	var delBtn = document.createElement('button');
 	delBtn.textContent = 'X';
-	delBtn.className = 'btn-sm';
 	delBtn.title = 'Delete region';
 	delBtn.onclick = (function(i) {
-		return function() {
+		return function(e) {
+			e.stopPropagation();
 			regions.splice(i, 1);
 			// rebuild collapsed map
 			var newCollapsed = {};
@@ -262,35 +342,9 @@ function buildRegionRow(idx) {
 			renderAll();
 		};
 	})(idx);
-	header.appendChild(delBtn);
+	controls.appendChild(delBtn);
 
-	row.appendChild(header);
-
-	// collapse button
-	var collapseBtn = document.createElement('button');
-	collapseBtn.className = 'collapse-toggle';
-	collapseBtn.textContent = isCollapsed ? '+' : '_';
-	collapseBtn.title = isCollapsed ? 'Expand region' : 'Collapse region';
-	collapseBtn.onclick = (function(i) {
-		return function(e) {
-			e.stopPropagation();
-			collapsedRegions[i] = !collapsedRegions[i];
-			// update button text and row class
-			var rowEl = collapseBtn.closest('.region-row');
-			if (collapsedRegions[i]) {
-				rowEl.classList.add('collapsed');
-				collapseBtn.textContent = '+';
-				collapseBtn.title = 'Expand region';
-			} else {
-				rowEl.classList.remove('collapsed');
-				collapseBtn.textContent = '_';
-				collapseBtn.title = 'Collapse region';
-			}
-			saveToStorage();
-		};
-	})(idx);
-	// append to row after header
-	row.appendChild(collapseBtn);
+	row.appendChild(controls);
 
 	// secondary targets
 	var secContainer = document.createElement('div');
@@ -373,10 +427,9 @@ function buildSecondaryRow(regionIdx, secIdx) {
 // add region
 function addRegion() {
 	regions.push(makeEmptyRegion());
-	// set collapsed state for new region to false
 	collapsedRegions[regions.length - 1] = false;
 	renderAll();
-	window.scrollTo(0, document.body.scrollHeight);
+	window.scrollTo(0, 0);
 }
 
 // generate sk
@@ -435,6 +488,7 @@ function generateSk() {
 
 	document.getElementById('skOutput').value = out.join('\n');
 	setStatus('Generated ' + regions.length + ' region(s).');
+	window.scrollTo(0, document.body.scrollHeight);
 }
 
 // load sk
@@ -445,90 +499,96 @@ function loadFromSk() {
 		return;
 	}
 
-	var parsed = {};
+	var parsedList = [];
+	var current = null;
+
 	var lines = text.split('\n');
-	var currentRegion = null;
 
 	for (var i = 0; i < lines.length; i++) {
-		// strip leading tabs/spaces
 		var line = lines[i].replace(/^[\t ]+/, '').replace(/[\t ]+$/, '');
 		if (line === '') continue;
 
-		// skip the function wrapper
+		// skip function wrapper
 		if (/^function\s+loadNoclipData\s*\(\s*\)\s*:/.test(line)) continue;
 
 		if (line.startsWith('#')) {
-			// accept both "# region: X" and "# --- region: X ---"
 			var regionMatch = line.match(/^#\s*-*\s*region:\s*(.+?)\s*-*$/);
 			if (regionMatch) {
-				currentRegion = regionMatch[1].trim();
-				parsed[currentRegion] = { rate: 100, main: '', secondary: [] };
+				current = {
+					name: regionMatch[1].trim(),
+					rate: 100,
+					main: '',
+					secondary: []
+				};
+				parsedList.push(current);
 			}
 			continue;
 		}
 
-		if (!currentRegion || !parsed[currentRegion]) continue;
-		var r = parsed[currentRegion];
+		if (!current) continue;
 
+		// success-rate: match against current region
 		var rateMatch = line.match(/^set\s+\{noclip\.regions::(.+?)::success-rate\}\s+to\s+(\d+)/);
-		if (rateMatch && rateMatch[1].trim() === currentRegion) {
-			r.rate = parseInt(rateMatch[2], 10);
+		if (rateMatch && rateMatch[1].trim() === current.name) {
+			current.rate = parseInt(rateMatch[2], 10);
 			continue;
 		}
 
+		// main
 		var mainMatch = line.match(/^set\s+\{noclip\.regions::(.+?)::main\}\s+to\s+"(.*)"/);
-		if (mainMatch && mainMatch[1].trim() === currentRegion) {
-			r.main = mainMatch[2];
+		if (mainMatch && mainMatch[1].trim() === current.name) {
+			current.main = mainMatch[2];
 			continue;
 		}
 
+		// secondary target
 		var secTargetMatch = line.match(/^set\s+\{noclip\.regions::(.+?)::secondary::(\d+)::target\}\s+to\s+"(.*)"/);
-		if (secTargetMatch && secTargetMatch[1].trim() === currentRegion) {
+		if (secTargetMatch && secTargetMatch[1].trim() === current.name) {
 			var idx = parseInt(secTargetMatch[2], 10) - 1;
-			while (r.secondary.length <= idx) r.secondary.push({ target: '', weight: 10 });
-			r.secondary[idx].target = secTargetMatch[3];
+			while (current.secondary.length <= idx) current.secondary.push({ target: '', weight: 10 });
+			current.secondary[idx].target = secTargetMatch[3];
 			continue;
 		}
 
+		// secondary weight
 		var secWeightMatch = line.match(/^set\s+\{noclip\.regions::(.+?)::secondary::(\d+)::weight\}\s+to\s+(\d+)/);
-		if (secWeightMatch && secWeightMatch[1].trim() === currentRegion) {
+		if (secWeightMatch && secWeightMatch[1].trim() === current.name) {
 			var idx2 = parseInt(secWeightMatch[2], 10) - 1;
-			while (r.secondary.length <= idx2) r.secondary.push({ target: '', weight: 10 });
-			r.secondary[idx2].weight = parseInt(secWeightMatch[3], 10);
+			while (current.secondary.length <= idx2) current.secondary.push({ target: '', weight: 10 });
+			current.secondary[idx2].weight = parseInt(secWeightMatch[3], 10);
 			continue;
 		}
 	}
 
+	if (parsedList.length === 0) {
+		setStatus('No valid region data found.');
+		return;
+	}
+
 	var newRegions = [];
-	for (var rn in parsed) {
-		if (!parsed.hasOwnProperty(rn)) continue;
-		var p = parsed[rn];
+	for (var r = 0; r < parsedList.length; r++) {
+		var p = parsedList[r];
 		var clean = [];
 		for (var s = 0; s < p.secondary.length; s++) {
 			if (p.secondary[s].target !== '') clean.push(p.secondary[s]);
 		}
 		if (clean.length === 0) clean.push({ target: '', weight: 10 });
 		newRegions.push({
-			name: rn,
+			name: p.name,
 			rate: p.rate,
 			main: p.main,
 			secondary: clean
 		});
 	}
 
-	if (newRegions.length === 0) {
-		setStatus('No valid region data found.');
-		return;
-	}
-
 	regions = newRegions;
-	// reset collapsed state for loaded regions
 	collapsedRegions = {};
 	for (var i = 0; i < regions.length; i++) {
 		collapsedRegions[i] = false;
 	}
 	renderAll();
 	setStatus('Loaded ' + regions.length + ' region(s).');
+	window.scrollTo(0, 0);
 }
 
 // copy
