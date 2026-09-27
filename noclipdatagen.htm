@@ -526,6 +526,9 @@ function generateSk() {
 			out.push('\t' + body[i]);
 		}
 	}
+	out.push('');
+	out.push('on script load:');
+	out.push('\tloadNoclipData()');
 
 	document.getElementById('skOutput').value = out.join('\n');
 	setStatus('Generated ' + regions.length + ' region(s).');
@@ -551,6 +554,9 @@ function loadFromSk() {
 
 		// skip function wrapper
 		if (/^function\s+loadNoclipData\s*\(\s*\)\s*:/.test(line)) continue;
+		// skip on script load wrapper and its call
+		if (/^on\s+script\s+load\s*:/.test(line)) continue;
+		if (/^loadNoclipData\s*\(\s*\)$/.test(line)) continue;
 
 		if (line.startsWith('#')) {
 			var regionMatch = line.match(/^#\s*-*\s*region:\s*(.+?)\s*-*$/);
