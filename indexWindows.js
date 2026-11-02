@@ -30,7 +30,7 @@ const windows = [
             <a style="border-style: solid; border-width: 2px; color: #C0C0C0;">
             <img src="https://drive.google.com/thumbnail?id=1BIxoQBdihParDx1kRJxlQtrauQvWKAeJ&amp;sz=w200" href="me.htm" style="height: 147px; width: 200px; border-style: inset; border-width: 2px; background-color: #C0C0C0; margin-left=2px">
             </a><br><br>
-            <a href="me.htm" style="text-align: center; display: block;">More...</a>
+			<button class="winbtn" onclick="window.location.href='me.htm'">More...</button>
             </p>
         `
     },
@@ -46,9 +46,9 @@ const windows = [
         content: `
             <p>
             <a href="circuitbreaker/index.htm" style="text-align: center; display: block;">
-            <img src="circuitbreaker/guitar_small.png" style="height: auto; width: 200px; border-style: inset; margin-left: auto; margin-right: auto; display: block; border-width: 2px; background-color: #C0C0C0;"><br><br>
-            CHECK IT OUT!!
+            <img src="circuitbreaker/guitar_small.png" style="height: auto; width: 200px; border-style: inset; margin-left: auto; margin-right: auto; display: block; border-width: 2px; background-color: #C0C0C0;"><br>
             </a>
+			<button class="winbtn" onclick="window.location.href='circuitbreaker/index.htm"'">CHECK IT OUT!!</button>
             </p>
         `
     },
@@ -62,7 +62,7 @@ const windows = [
         moldImage: "images/othervines/vinesPlaceholder.png",
         content: `
             <p><img src="https://drive.google.com/thumbnail?id=18JjJItFT32QNWM6o8TjA0GXvdgvZ71gq&sz=w200" style="height: auto; width: 200px; border-style: inset; border-width: 2px; background-color: #C0C0C0;"></p>
-            <p><a href="gallery/gallery1.htm" style="text-align: center; display: block;">Old gallery</a></p>
+            <p><button class="winbtn" onclick="window.location.href='gallery/gallery1.htm'">Old gallery</button></p>
         `
     },
     
@@ -87,7 +87,7 @@ const windows = [
         content: `
             <p>&nbsp;random asortement&nbsp;<br>&nbsp;of stuff i made&nbsp;<br>&nbsp;or found on&nbsp;<br>&nbsp;the internet<p>
             <img id="preview_gif" src="" alt="randTenorGIF" style="height: auto; width: 100px; margin-left: auto; margin-right: auto; display: block; border-style: inset; border-width: 2px; background-color: #C0C0C0;"><br><br>
-            <a href="funstuff.htm" style="text-align: center; display: block;">View</a>
+			<button class="winbtn" onclick="window.location.href='funstuff.htm'">View</button>
             </p>
         `
     },
@@ -100,7 +100,8 @@ const windows = [
         customClass: "maindiv",
         moldImage: "images/othervines/vinesPlaceholder.png",
         content: `
-            <p><a href="comments.htm" style="text-align: center; display: block;"><img src="images/20ZBOOKS24022619.png?=1" style="height: auto; width: auto;"><p>Comment</a></p></p>
+            <p><a href="comments.htm" style="text-align: center; display: block;"><img src="images/20ZBOOKS24022619.png?=1" style="height: auto; width: auto;"></a></p>
+			<button class="winbtn" onclick="window.location.href='comments.htm'">Comment</button><br>
         `
     },
     
@@ -113,7 +114,8 @@ const windows = [
         moldImage: "images/othervines/vinesblogy.png",
         content: `
             <p>&nbsp;Probably the most&nbsp;<br>&nbsp;important part of&nbsp;<br>&nbsp;this website, and&nbsp;<br>&nbsp;the only one i&nbsp;<br>&nbsp;actively use&nbsp;<p>
-            <a href="https://blog.mirajspalace.space/index.htm" style="text-align: center; display: block;"><img src="images/2024034319.png?=v2" style="height: auto; width: auto;"><br><p>View BLOG</a></p>
+            <a href="https://blog.mirajspalace.space/index.htm" style="text-align: center; display: block;"><img src="images/2024034319.png?=v2" style="height: auto; width: auto;"><br><br></a>
+			<button class="winbtn" onclick="window.location.href='https://blog.mirajspalace.space/index.htm'">View</button>
         `
     },
     
