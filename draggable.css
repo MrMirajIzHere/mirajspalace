@@ -20,8 +20,19 @@
   line-height: 8px;
   background-color: #C0C0C0;
   color: #000;
-  border-style: outset;
-  border-width: 2px;
+  
+  border-top-style: outset;
+  border-top-color: #fff;
+  
+  border-right-style: outset;
+  border-right-color: #4C4C4C;
+  
+  border-bottom-style: outset;
+  border-bottom-color: #4C4C4C;
+  
+  border-left-style: outset;
+  border-left-color: #fff;
+  
   padding: 1px 1ch;
   display: flex;
   align-items: center;
@@ -29,6 +40,12 @@
   margin: 0 auto;
   cursor: pointer;
   box-sizing: border-box;
+}
+.winbtn:hover {
+  border-top-color: #d9d9d9;
+  border-right-color: #3d3d3d;
+  border-bottom-color: #3d3d3d;
+  border-left-color: #d9d9d9;
 }
 .winbtn:active {
   border-style: inset;
