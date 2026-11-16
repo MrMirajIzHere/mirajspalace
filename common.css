@@ -12,7 +12,7 @@
 	-webkit-font-smoothing: none;
 	font-smooth: never;
 }
-/*font-size: 8;*/
+/*font-size: 16;*/
 
 @font-face {
 	font-family: IBM_CONV;
@@ -66,7 +66,7 @@
      1px  1px 0 #000,
      0    1px 0 #000,
     -1px  1px 0 #000;
-	z-index: 29;
+	z-index: 30;
 }
 
 .stroke2 {
@@ -84,7 +84,29 @@
      2px  2px 0 #000,
      0    2px 0 #000,
     -2px  2px 0 #000;
-	z-index: 49;
+	z-index: 50;
+}
+
+.strokeg {
+	text-shadow:
+	-3px -3px 0 #000,
+     0   -3px 0 #000,
+     3px -3px 0 #000,
+     3px  0   0 #000,
+     3px  3px 0 #000,
+     0    3px 0 #000,
+    -3px  3px 0 #000,
+    -3px  0   0 #000,
+	
+    -4px -4px 0 #fff,
+     0   -4px 0 #fff,
+     4px -4px 0 #fff,
+     4px  0   0 #fff,
+     4px  4px 0 #fff,
+     0    4px 0 #fff,
+    -4px  4px 0 #fff,
+    -4px  0   0 #fff;
+	z-index: 70
 }
 
 .reswarn {

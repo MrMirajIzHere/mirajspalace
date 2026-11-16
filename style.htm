@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+	<title>style guide</title>
+	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+	<link href="/images/favicon.png" rel="icon" type="image/png" />
+	<meta content="Miraj's Palace" property="og:title" />
+	<meta content="http://mirajspalace.space/style.htm" property="og:url" />
+	<meta content="http://mirajspalace.space/images/mirajspalaceEMBED.png" property="og:image" />
+	
+	<link rel="stylesheet" href="common.css?=1">
+<script src="common.js"></script>
+</head>
+<style>
+body {
+	background-color: #000;
+	color: #fff;
+	font-family: IBM;
+	font-size: 16px;
+}
+
+html.zoomed-200 {
+	zoom: 2;
+}
+
+@supports not (zoom: 1) {
+	html.zoomed-200 body {
+		transform: scale(2);
+		transform-origin: top left;
+		width: 50%;
+	}
+}
+</style>
+</head>
+<body background="images/animspace.gif" style="image-rendering: pixelated;" width="100%">
+	<button id="scaleBtn">100%</button>
+	<p>COMMON.CSS</p>
+	<div style="font-family: Sharp; font-size: 8;">Sharp, size: 8, main font</div>
+	<div style="font-family: IBM; font-size: 16;">IBM, size: 16, secondary font(supports cyrillic)</div>
+	<div style="font-family: IBM_CONV; font-size: 8;">IBM_CONV, size: 8, old-stylized font </div>
+	<div style="font-family: IBM_XGA; font-size: 20;">IBM_XGA, size: 20, big and fancy-serifed font</div>
+	<div style="font-family: DOS-V; font-size: 12;">DOS-V, size: 12, thin font(supports japanese characters)</div>
+	<div style="font-family: HP; font-size: 12;">HP, size: 12, big blocky-serifed font</div>
+	<div style="font-family: EAGLE; font-size: 8;">EAGLE, size: 8, futuristic-stylized font</div>
+	<div style="background-color: #888888;" class="stroke">.stroke class, regular and not very glitchy</div>
+	<div style="background-color: #888888;" class="stroke2">.stroke2 class, thicker and glitchyer, works better on double font size</div>
+	<div style="background-color: #888888;" class="strokeg">.strokeg class, stacked glitch stroke</div>
+
+<script>
+	const btn = document.getElementById('scaleBtn');
+	let zoomed = false;
+	
+	btn.addEventListener('click', () => {
+		zoomed = !zoomed;
+		document.documentElement.classList.toggle('zoomed-200', zoomed);
+		btn.textContent = (zoomed ? '200%' : '100%');
+		
+		btn.style.zoom = zoomed ? 0.5 : 1;
+	});
+</script>
+</body>
+</html>

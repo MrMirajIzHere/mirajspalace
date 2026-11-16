@@ -1,0 +1,358 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+	<title>about</title>
+	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+	<link href="/images/favicon.png" rel="icon" type="image/png" />
+	<meta content="Miraj's Palace" property="og:title" />
+	<meta content="Ab0utT" property="og:description" />
+	<meta content="http://mirajspalace.space/about" property="og:url" />
+	<meta content="http://mirajspalace.space/images/mirajspalaceEMBED.png" property="og:image" />
+
+	<link rel="stylesheet" href="common.css">
+	<link rel="stylesheet" href="draggable.css">
+	<link rel="prefetch" href="draggable.js?=v4">
+	<script src="common.js"></script>
+</head>
+
+<style>
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+body {
+	background: url("images/animspace.gif");
+	background-color: #000;
+	image-rendering: pixelated;
+	color: #fff;
+}
+
+figure {
+	font-family: DOS-V;
+	font-size: 12px;
+}
+
+.layout {
+	display: flex;
+	min-height: 100vh;
+	align-items: stretch;
+}
+
+.sidebar {
+	font-family: Sharp;
+	font-size: 8;
+	width: 250px;
+	flex: 0 0 200px;
+	background-color: #705889;
+	padding: 10px;
+	box-sizing: border-box;
+	border: ridge #985eb7;
+}
+
+.display {
+	color: #ffffff;
+	font-family: IBM;
+	font-size: 16;
+	flex: 1 1 auto;
+	padding: 10px;
+	box-sizing: border-box;
+	overflow: auto;
+}
+
+.sidebar > div {
+	margin-bottom: 6px;
+}
+.sidebar img {
+	width: 200px;
+	height: 147px;
+	display: block;
+	margin-bottom: 10px;
+	border: ridge;
+	color: #000;
+}
+
+.category {
+	margin-top: 10px;
+	margin-bottom: 4px;
+	color: #fff;
+	border-bottom: 1px solid #aaaaaa;
+}
+
+.panel {
+	display: none;
+}
+.panel.active {
+	display: block;
+}
+
+.flag {
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+}
+.nb { background-image: url("images/flags/nb.png"); }
+.ace { background-image: url("images/flags/ace.png"); }
+.aro { background-image: url("images/flags/aro.png"); }
+.queer { background-image: url("images/flags/queer.png"); }
+
+div.scroll-container {
+	background-color: #000;
+	overflow: auto;
+	white-space: nowrap;
+	padding: 10px;
+}
+div.scroll-container figure {
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	padding: 10px;
+	vertical-align: top;
+}
+div.scroll-container figcaption {
+	color: #fff;
+}
+div.scroll-container img {
+	display: block;
+	height: 666px;
+}
+
+@keyframes transitionIn {
+	from { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+	to   { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}
+.revealAnim {
+	animation: transitionIn 0.5s steps(6, end) forwards;
+}
+
+.dropbtn {
+	background-color: #000000;
+	color: yellow;
+	border: none;
+}
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+.dropdown-content {
+	display: none;
+	position: absolute;
+	z-index: 1;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.dropdown:hover .dropdown-content { display: block; }
+
+.character {
+	filter: sepia(100%) saturate(250%) brightness(65%) hue-rotate(230deg);
+}
+.blog {
+	filter: sepia(100%) saturate(300%) brightness(65%) hue-rotate(210deg);
+}
+.comment {
+	filter: sepia(100%) saturate(200%) brightness(70%) hue-rotate(100deg);
+}
+.mainframe {
+	filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(50deg);
+}
+.tech {
+	filter: sepia(0%) saturate(300%) brightness(70%) hue-rotate(50deg);
+}
+</style>
+
+<body>
+
+<div class="layout">
+
+	<!-- SIDEBAR -->
+	<div class="sidebar">
+		<div class="stroke2 stroke">Miraj's palace</div>
+		<img src="https://drive.google.com/thumbnail?id=1BIxoQBdihParDx1kRJxlQtrauQvWKAeJ&sz=w200" alt="oops, image didn't load: photo of me sitting on the ground in a park under a streetlight with an acoustic guitar, it has many stickers. my face is blurred"/>
+
+		<div class="category stroke">Main</div>
+		<div class="winbtn" data-panel="about">about</div>
+		<div class="winbtn" onclick="location.href='https://links.mirajspalace.space/'">my links</div>
+		<div class="winbtn" data-panel="things">my things</div>
+
+		<div class="category stroke">Characters</div>
+		<div class="winbtn character" data-panel="miraj" onclick="shuffleAll();">Miraj</div>
+		<div class="winbtn character" data-panel="fantom" onclick="shuffleAll();">"fading fantom"</div>
+
+		<div class="category stroke">Pages</div>
+		<div class="winbtn" onclick="location.href='./index.htm'">main</div>
+		<div class="winbtn blog" onclick="location.href='https://blog.mirajspalace.space'">Blog</div>
+		<div class="winbtn" onclick="location.href='./gallery/gallery1.htm?page=1'">old gallery</div>
+		<div class="winbtn comment" onclick="location.href='.comments.htm'">leave a comment</div>
+		<div class="winbtn mainframe" onclick="location.href='https://terminal.mirajspalace.space/'">mainframe</div>
+
+		<div class="category stroke">Technical</div>
+		<div class="winbtn tech" onclick="location.href='./gdlinkconverter.htm'">tools</div>
+		<div class="winbtn tech" onclick="location.href='./style.htm'">style guide</div>
+	</div>
+
+	<!-- DISPLAY -->
+	<div class="display">
+
+		<!-- ABOUT -->
+		<div class="panel active stroke2" id="panel-about">
+			<p><img src="https://drive.google.com/thumbnail?id=1BIxoQBdihParDx1kRJxlQtrauQvWKAeJ&sz=w800" alt="oops, image didn't load: it's the same photo as in the side bar, just quite a bit bigger" style="border: ridge 4px;"/></p>
+			Hello! You can call me Miraj [mi-raazh] or just mj, i go primarily by "they/them", though "he" is okay on occasion<br><br>
+			I identify as
+			<a class="nb flag" href="https://lgbtqia.wiki/wiki/Non-Binary">&nbsp;non-binary&nbsp;</a><br>
+			Preferences i have at the moment are:
+			<a class="ace flag" href="https://lgbtqia.wiki/wiki/Asexual">&nbsp;asexual&nbsp;</a>
+			<a class="aro flag" href="https://lgbtqia.wiki/wiki/Cupioromantic">&nbsp;cupioromantic&nbsp;</a> and
+			<a class="queer flag" href="https://lgbtqia.wiki/wiki/Queer">&nbsp;queer&nbsp;</a><br>
+			<div style="color: #888">(and all these flags are clickable)</div><br>
+			Coder if need be<br>
+			Artist/designer if need be<br><br>
+			Im a furry, but relly i'd go with "multifandom"
+			
+			<p>
+				<div style="color: #ffffff; background-color: #000000">88x31 badges</div><br>
+	
+				<a href="https://mirajspalace.space" title="Miraj's Palace"><img border="0" height="31" width="88" src="https://mirajspalace.space/images/palaceGIF.gif" /></a>
+				<img border="0" height="31" width="88" src="images/stuffs/acab.gif"/>
+				<img border="0" height="31" width="88" src="images/stuffs/anarchynow.gif"/>
+				<img border="0" height="31" width="88" src="images/stuffs/madewithtwopaws.gif"/>
+				<img border="0" height="31" width="88" src="images/stuffs/nowebp.gif"/>
+				<img border="0" height="31" width="88" src="images/stuffs/nb_noproblem.jpg"/>
+				<img border="0" height="31" width="88" src="images/stuffs/thevoid.gif"/><br>
+				<img border="0" height="31" width="88" src="images/stuffs/they-them.gif"/>
+				<img border="0" height="31" width="88" src="images/stuffs/css-is-difficult.gif"/>
+				<img border="0" height="31" width="88" src="images/stuffs/bestvw.gif"/>
+				<a href="https://archive.org/"><img border="0" height="31" width="88" src="images/stuffs/preserve.gif"/></a>
+				<a href="http://wiby.org/"><img border="0" height="31" width="88" src="http://wiby.org/about/wiby.org.gif"/></a>
+				<a href="https://www.aimp.ru/"><img border="0" height="31" width="88" src="https://www.aimp.ru/images/88x31.png"/></a>
+				<a href="https://lgbtqia.wiki/wiki/LGBTQIA%2B_Wiki"><img border="0" height="31" width="88" src="images/stuffs/lgbtqia+wiki.png"/></a>
+			</p>
+		</div>
+
+		<!-- MY THINGS -->
+		<div class="panel" id="panel-things">
+			<iframe src="mystuff.htm" style="width:100%; height:100%; border:0;"></iframe>
+		</div>
+
+		<!-- MIRAJ -->
+		<div class="panel stroke" id="panel-miraj">
+			<div class="char_miraj">
+				<div style="font-size:32;">Miraj</div>
+				<div style="background-color: #7d3d83; width:10ch;">&nbsp;they/he&nbsp;</div>
+				This is my main character, and despite how it might look, it's all the same one. They also have some basic
+				<div class="dropdown">
+				<button class="dropbtn stroke" style="font-family: IBM; font-size: 16;">lore</button>
+					<div class="dropdown-content">
+						<img src="images/miraj_lore.png" style="display: block; border-style: inset; border-width: 2px;" class="revealAnim">
+					</div>
+				</div>
+
+				<div class="scroll-container" align="center">
+				<figure><img src="https://drive.google.com/thumbnail?id=1izcy3ukCTW01nzHJczlhR0-U5Fl9g2Y5&sz=h666"/> <figcaption>merichi</figcaption></figure>
+				<figure><img src="https://drive.google.com/thumbnail?id=1i6rSlosZE3Pl_9BotSsxilyHhbjFUe3D&sz=h666"/> <figcaption>twitter: @juliemine_rus</figcaption></figure>
+				<figure><img src="https://drive.google.com/thumbnail?id=1j7UWO7IAKZKeDBAd5K6nd22xh2976xv-&sz=h666"/> <figcaption>twitter: @juliemine_rus</figcaption></figure>
+				<figure><img src="https://drive.google.com/thumbnail?id=1ONcGb1kLAFm65qPoNrdm7T143zJMLtW9&sz=h666"/> <figcaption>tiktok: @misskittyklaws</figcaption></figure>
+				<figure><img src="https://drive.google.com/thumbnail?id=1E1Dud_88X6h-pHKx_4YXAMXVAeCoT3Ic&sz=h666"/> <figcaption>tiktok: @gingerguineapig</figcaption></figure>
+				<figure><img src="https://drive.google.com/thumbnail?id=1DON6vQ2bFxF79Ph6f1Mzvjwhj2Xr1aMY&sz=h666"/> <figcaption>telegram: @jjemka</figcaption></figure>
+				<figure><img src="https://drive.google.com/thumbnail?id=1vP8DQ3h4pVw3lo1ZvbaMTz-j1smVpGx8&sz=h666"/> <figcaption>me</figcaption></figure>
+				</div>
+			</div>
+		</div>
+
+		<!-- FADING FANTOM -->
+		<div class="panel stroke" id="panel-fantom">
+			<div class="char_fadingfantom">
+				<div style="font-size:32;">"fading fantom"</div>
+				<div style="background-color: #7d3d83; width:12ch;">&nbsp;they/them&nbsp;</div>
+				
+				Not even a proper refsheet, and no real lore yet. Expansion on the world building can be found in the <a style="color: #0f0" href="https://terminal.mirajspalace.space/">mainframe terminal</a><br>
+				(never watched evangelion btw)
+
+				<div class="scroll-container" align="center">
+				<figure><img src="https://drive.google.com/thumbnail?id=1XBSNvtSwq5HuLlt2qm2QAX_sTsRs5foH&sz=h666"/> <figcaption>me</figcaption></figure>
+				<figure><img src="https://drive.google.com/thumbnail?id=1DtMImCPJEvMe7pu67qlU0J0r5NT4-H7i&sz=h666"/> <figcaption>me</figcaption></figure>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+// shuffle
+function shuffleFigures(container) {
+	var figures = Array.from(container.children).filter(function (el) {
+		return el.tagName === 'FIGURE';
+	});
+
+	for (var i = figures.length - 1; i > 0; i--) {
+		var j = Math.floor(Math.random() * (i + 1));
+		var tmp = figures[i];
+		figures[i] = figures[j];
+		figures[j] = tmp;
+	}
+
+	figures.forEach(function (fig) {
+		container.appendChild(fig);
+	});
+}
+
+function shuffleAll() {
+	document.querySelectorAll('.scroll-container').forEach(shuffleFigures);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+
+	// switching
+	var buttons = document.querySelectorAll('.winbtn[data-panel]');
+	buttons.forEach(function (btn) {
+		btn.addEventListener('click', function () {
+			var target = btn.getAttribute('data-panel');
+			activatePanel(target);
+			
+			// update url
+			var url = new URL(window.location);
+			url.searchParams.set('panel', target);
+			history.pushState({panel: target}, '', url);
+		});
+	});
+
+	function activatePanel(target) {
+		document.querySelectorAll('.panel').forEach(function (p) {
+			p.classList.remove('active');
+		});
+		var panel = document.getElementById('panel-' + target);
+		if (panel) panel.classList.add('active');
+
+		buttons.forEach(function (b) { b.classList.remove('active'); });
+		var activeBtn = document.querySelector('.winbtn[data-panel="' + target + '"]');
+		if (activeBtn) activeBtn.classList.add('active');
+	}
+
+	// load
+	var params = new URLSearchParams(window.location.search);
+	var initialPanel = params.get('panel');
+	if (initialPanel && document.getElementById('panel-' + initialPanel)) {
+		activatePanel(initialPanel);
+	} else {
+		// default
+		activatePanel('about');
+	}
+
+	window.addEventListener('popstate', function(e) {
+		var params = new URLSearchParams(window.location.search);
+		var panel = params.get('panel');
+		if (panel && document.getElementById('panel-' + panel)) {
+			activatePanel(panel);
+		} else {
+			activatePanel('about');
+		}
+	});
+
+	shuffleAll();
+});
+</script>
+</body>
+</html>

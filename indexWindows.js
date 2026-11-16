@@ -30,7 +30,7 @@ const windows = [
             <a style="border-style: solid; border-width: 2px; color: #C0C0C0;">
             <img src="https://drive.google.com/thumbnail?id=1BIxoQBdihParDx1kRJxlQtrauQvWKAeJ&amp;sz=w200" href="me.htm" style="height: 147px; width: 200px; border-style: inset; border-width: 2px; background-color: #C0C0C0; margin-left=2px">
             </a><br><br>
-			<button class="winbtn" onclick="window.location.href='me.htm'">More...</button>
+			<button class="winbtn" onclick="window.location.href='about.htm'">More...</button>
             </p>
         `
     },
