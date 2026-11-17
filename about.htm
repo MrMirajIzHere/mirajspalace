@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="common.css">
 	<link rel="stylesheet" href="draggable.css">
 	<link rel="prefetch" href="draggable.js?=v4">
+	<script>window.isDisabled = true;</script>
 	<script src="common.js"></script>
 </head>
 
@@ -174,7 +175,7 @@ div.scroll-container img {
 		<img src="https://drive.google.com/thumbnail?id=1BIxoQBdihParDx1kRJxlQtrauQvWKAeJ&sz=w200" alt="oops, image didn't load: photo of me sitting on the ground in a park under a streetlight with an acoustic guitar, it has many stickers. my face is blurred"/>
 
 		<div class="category stroke">Main</div>
-		<div class="winbtn" data-panel="about">about</div>
+		<div class="winbtn" data-panel="about" onclick="if(isMobile) { scaleImage(); }">about</div>
 		<div class="winbtn" onclick="location.href='https://links.mirajspalace.space/'">my links</div>
 		<div class="winbtn" data-panel="things">my things</div>
 
@@ -199,7 +200,7 @@ div.scroll-container img {
 
 		<!-- ABOUT -->
 		<div class="panel active stroke2" id="panel-about">
-			<p><img src="https://drive.google.com/thumbnail?id=1BIxoQBdihParDx1kRJxlQtrauQvWKAeJ&sz=w800" alt="oops, image didn't load: it's the same photo as in the side bar, just quite a bit bigger" style="border: ridge 4px;"/></p>
+			<p><img src="https://drive.google.com/thumbnail?id=1BIxoQBdihParDx1kRJxlQtrauQvWKAeJ&sz=w800" alt="oops, image didn't load: it's the same photo as in the side bar, just quite a bit bigger" style="border: ridge 4px; width: 800px;" class="about-img"/></p>
 			Hello! You can call me Miraj [mi-raazh] or just mj, i go primarily by "they/them", though "he" is okay on occasion<br><br>
 			I identify as
 			<a class="nb flag" href="https://lgbtqia.wiki/wiki/Non-Binary">&nbsp;non-binary&nbsp;</a><br>
@@ -210,7 +211,7 @@ div.scroll-container img {
 			<div style="color: #888">(and all these flags are clickable)</div><br>
 			Coder if need be<br>
 			Artist/designer if need be<br><br>
-			Im a furry, but relly i'd go with "multifandom"
+			Im a furry, but really i'd go with "multifandom"
 			
 			<p>
 				<div style="color: #ffffff; background-color: #000000">88x31 badges</div><br>
@@ -281,6 +282,11 @@ div.scroll-container img {
 </div>
 
 <script>
+// scale
+function scaleImage() {
+	document.querySelectorAll('.about-img').forEach(el => el.style.width = document.querySelector('.display').offsetWidth - 30 + "px");
+	document.querySelectorAll('.winbtn').forEach(el => el.style.lineHeight = "20px");
+}
 // shuffle
 function shuffleFigures(container) {
 	var figures = Array.from(container.children).filter(function (el) {
@@ -350,6 +356,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			activatePanel('about');
 		}
 	});
+	
+	if(isMobile) {
+		scaleImage();
+	}
 
 	shuffleAll();
 });
