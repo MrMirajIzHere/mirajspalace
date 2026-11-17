@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 	
-	if(isMobile) {
+	if(window.isMobile || window.isSmallScreen) {
 		scaleImage();
 	}
 
