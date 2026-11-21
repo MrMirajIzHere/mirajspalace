@@ -5,12 +5,56 @@
 
     console.log("isMobile " + window.isMobile, ",isZoomed " + window.isZoomed, ",isSmallScreen " + window.isSmallScreen, ",window.isDisabled " + window.isDisabled);
 
-    if ((window.isMobile || window.isZoomed || window.isSmallScreen) && !window.isDisabled) {
-        document.write(`
-<div style="position: fixed; color: white; font-family: DOS-V; font-size:24; line-height: 1.2; z-index: 30; column;" class="stroke2 reswarn">
-recommended horizontal resolution is <span style="color:red">1920px </span>at <span style="color:red">100% zoom</span><br>
-recommended browser <span style="color:red">Firefox </span>on a <span style="color:red">computer</span><br>
-click <a style="color:blue" onclick="this.parentElement.style.display = 'none';" href="#">[Here]</a> to hide this warning<br>
-</div>`);
-    }
+    if ((window.isMobile || window.isZoomed || window.isSmallScreen || window.warnForced) && !window.isDisabled) {
+    const warningHTML = `
+	<div style="position: fixed; color: white; font-family: DOS-V; font-size:24; line-height: 1.2; z-index: 30; column;" class="stroke2 reswarn">
+	recommended horizontal resolution is <span style="color:red">1920px </span>at <span style="color:red">100% zoom</span><br>
+	recommended browser is <span style="color:red">Firefox </span>on a <span style="color:red">computer</span><br>
+	click <a style="color:blue" onclick="this.parentElement.style.display = 'none';" href="#">[Here]</a> to hide this warning<br>
+	</div>`;
+		document.addEventListener('DOMContentLoaded', () => {
+			const testContainer = document.querySelector('.reswarntest');
+			if (testContainer) {
+				testContainer.innerHTML = warningHTML;
+			} else {
+				const div = document.createElement('div');
+				div.innerHTML = warningHTML;
+				document.body.prepend(div.firstElementChild);
+			}
+		});
+	}
 })(navigator.userAgent || navigator.vendor || window.opera);
+
+(function () {
+	if (!window.NeedsCentering) return;
+
+	function centerLines() {
+		var lines = document.querySelectorAll('.toCenter');
+		var viewportWidth = document.documentElement.clientWidth;
+
+		for (var i = 0; i < lines.length; i++) {
+			var line = lines[i];
+
+			var display = getComputedStyle(line).display;
+			if (display === 'block' || display === 'list-item' || display === 'flex' || display === 'grid') {
+				line.style.display = 'inline-block';
+			}
+
+			var textWidth = line.offsetWidth;
+			var rawLeft = (viewportWidth / 2) - (textWidth / 2);
+			var roundedLeft = Math.round(rawLeft);
+
+			line.style.left = roundedLeft + 'px';
+			line.style.position = 'relative';
+		}
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', centerLines);
+	} else {
+		centerLines();
+	}
+
+	window.addEventListener('load', centerLines);
+	window.addEventListener('resize', centerLines);
+})();

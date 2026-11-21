@@ -9,6 +9,10 @@
 	<meta content="http://mirajspalace.space/images/mirajspalaceEMBED.png" property="og:image" />
 	
 	<link rel="stylesheet" href="common.css?=1">
+	<script>
+	window.NeedsCentering = true;
+	window.warnForced = true;
+	</script>
 <script src="common.js"></script>
 </head>
 <style>
@@ -45,6 +49,14 @@ html.zoomed-200 {
 	<div style="background-color: #888888;" class="stroke">.stroke class, regular and not very glitchy</div>
 	<div style="background-color: #888888;" class="stroke2">.stroke2 class, thicker and glitchyer, works better on double font size</div>
 	<div style="background-color: #888888;" class="strokeg">.strokeg class, stacked glitch stroke</div>
+	<p>COMMON.JS</p>
+	<div>this is a warning that will appear if<br>((window.isMobile || window.isZoomed || window.isSmallScreen || window.warnForced) && !window.isDisabled) = true
+	<div class="reswarntest"></div></div><br><br><br><br><br><br>
+	<div class="toCenter stroke" style="background-color: #888888;">
+							window.NeedsCentering = true; in a script before common.js<br>
+							to center an object, round to nearest 1px,<br>
+							and make it "display: inline-block;" if applicable<br>
+							class toCenter</div>
 
 <script>
 	const btn = document.getElementById('scaleBtn');

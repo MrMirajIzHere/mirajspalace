@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+	<title>E-m4il</title>
+	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+	<link href="/images/favicon.png" rel="icon" type="image/png" />
+	<meta content="Miraj's Palace" property="og:title" />
+	<meta content="E-m4iL" property="og:description" />
+	<meta content="http://mirajspalace.space/" property="og:url" />
+	<meta content="http://mirajspalace.space/images/mirajspalaceEMBED.png" property="og:image" />
+
+	<link rel="stylesheet" href="common.css">
+	<script>
+	window.isDisabled = true;
+	window.NeedsCentering = true;
+	</script>
+	<script src="common.js"></script>
+</head>
+
+<style>
+body {
+	background: url("images/animspace.gif");
+	background-color: #000;
+	image-rendering: pixelated;
+	color: #fff;
+	font-family: IBM;
+	font-size: 16;
+}
+
+.title {
+	padding:7px; 
+	color: #dcff73; 
+	background-color: #004d66
+}
+
+</style>
+
+<body>
+<br>
+<div>
+	<span class="toCenter title" style="font-size: 64px">&nbsp;&nbsp;E-m4iL MEEEEE33e&nbsp;&nbsp;</span><br>
+	<span class="toCenter title">&nbsp;&nbsp;this is not a "real" address(aka a dns forward address) so i can't reply,&nbsp;&nbsp;</span><br>
+	<span class="toCenter title">&nbsp;&nbsp;but i'll still get your message!&nbsp;&nbsp;</span><br><br>
+</div>
+<hr style="color: #fff">
+
+<div class="toCenter">
+<!--i fully just copied it all from somewhere on the internet, why the hell would i know how to make an email form, we're in 2026-->
+	<form id="mailForm">
+	<p>
+		<label for="subject">Subject:</label><br>
+		<input type="text" id="subject" name="subject">
+	</p>
+	
+	<p>
+		<label for="message">Message:</label><br>
+		<textarea id="message" name="message" rows="6" cols="60"></textarea>
+	</p>
+	
+	<p align="center"><button type="submit">Send</button></p>
+	</form>
+	
+	<hr style="color: #fff">
+	
+	<p>
+	<span style="color: #666">sending works via your set up email app/program/site<br>if you don't have anything set up, just copy the address</span><br>
+	Copy address: <a id="copyBtn" href="#" style="color: #00bfff">message@mirajspalace.space</a>
+	</p>
+	
+</div>
+
+<script>
+const email = 'message@mirajspalace.space';
+
+document.getElementById('mailForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value;
+
+    let query = '';
+    if (subject) query += 'subject=' + encodeURIComponent(subject);
+    if (message) {
+        if (query) query += '&';
+        query += 'body=' + encodeURIComponent(message);
+    }
+
+    window.location.href = 'mailto:' + email + (query ? '?' + query : '');
+});
+
+document.getElementById('copyBtn').addEventListener('click', async function () {
+	try {
+		await navigator.clipboard.writeText(email);
+	} catch (err) {}
+});
+</script>
+
+</body>
+</html>
